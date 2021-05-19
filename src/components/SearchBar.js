@@ -12,7 +12,7 @@ const SearchBar = ({state}) => {
         setSearch(query);
     }
 
-    return (
+    return (  
         <div>
             <form id="searchBar" onSubmit={onSubmit}>
                 <input type="text" name="search" autoComplete="off"/>
