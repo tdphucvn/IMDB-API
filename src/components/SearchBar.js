@@ -20,7 +20,11 @@ const SearchBar = ({state}) => {
                 <div className="form-row">
                     <div className="input-wrapper">
                         <label htmlFor="search">Title</label>
-                        <input type="text" name="search" autoComplete="off"/>
+                        <input type="text" name="search" autoComplete="off" placeholder="Title..."/>
+                    </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="year">Released Year</label>
+                        <input type="number" name="year" min="1900" autoComplete="off" placeholder="Realesed Year..."/>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="type">Type</label>
@@ -30,10 +34,7 @@ const SearchBar = ({state}) => {
                             <option value="episode">Episode</option>
                         </select>
                     </div>
-                    <div className="input-wrapper">
-                        <label htmlFor="year">Released Year</label>
-                        <input type="number" name="year" min="1900" autoComplete="off"/>
-                    </div>
+
                 </div>
                 <div className="form-row">
                     <input type="submit" value="Search"/>

@@ -47,7 +47,8 @@ const Dashboard = ({previousMovies}) => {
 const style = {
   display: 'flex',
   width: '100vw',
-  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'center',
   height: '100vh',
 }
 
