@@ -37,11 +37,18 @@ const Dashboard = ({previousMovies}) => {
     }, [search]);
 
     return (
-        <div>
+        <div style={style}>
             <SearchBar state={[search, setSearch]}/>
             <Movies movies={movies}/>
         </div>
     )
 };
+
+const style = {
+  display: 'flex',
+  width: '100vw',
+  justifyContent: 'center',
+  height: '100vh',
+}
 
 export default Dashboard

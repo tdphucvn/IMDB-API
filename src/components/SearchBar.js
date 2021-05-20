@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import '../css/dashboard.css';
+
 
 const SearchBar = ({state}) => {
 
@@ -13,16 +15,29 @@ const SearchBar = ({state}) => {
     }
 
     return (  
-        <div>
+        <div className="dashboard-container">
             <form id="searchBar" onSubmit={onSubmit}>
-                <input type="text" name="search" autoComplete="off"/>
-                <select name="type" id="type">
-                    <option value="movie">Movie</option>
-                    <option value="series">Series</option>
-                    <option value="episode">Episode</option>
-                </select>
-                <input type="number" name="year" min="1900" autoComplete="off"/>
-                <input type="submit" value="Search"/>
+                <div className="form-row">
+                    <div className="input-wrapper">
+                        <label htmlFor="search">Title</label>
+                        <input type="text" name="search" autoComplete="off"/>
+                    </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="type">Type</label>
+                        <select name="type" id="type">
+                            <option value="movie">Movie</option>
+                            <option value="series">Series</option>
+                            <option value="episode">Episode</option>
+                        </select>
+                    </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="year">Released Year</label>
+                        <input type="number" name="year" min="1900" autoComplete="off"/>
+                    </div>
+                </div>
+                <div className="form-row">
+                    <input type="submit" value="Search"/>
+                </div>
             </form>
         </div>
     )
