@@ -3,37 +3,44 @@ import Movies from './Movies';
 import SearchBar from './SearchBar';
 
 
-const Dashboard = ({previousMovies}) => {
+const Dashboard = (prevSearch) => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState([]);
 
-    if(previousMovies !== undefined) setMovies(previousMovies);
-    
-    useEffect(() => {
-      const fetchData = async () => {
-        const URL = `http://www.omdbapi.com/?apikey=2b921791&${search}`;
-        await fetch(URL, {method: 'GET', contentType: 'application/json'})
-          .then((res) => {
-            if(res.ok) return res.text();
-            return res.text().then(err => {
-              return Promise.reject({
-                status: res.status,
-                statusText: res.statusText,
-                errorMessage: err,
+    const fetchMoviesCallback = (search) => {
+      if(prevSearch.location.state.previousMovies.movies === undefined){
+        console.log('Undefined')
+        const fetchData = async () => {
+          const URL = `http://www.omdbapi.com/?apikey=2b921791&${search}`;
+          await fetch(URL, {method: 'GET', contentType: 'application/json'})
+            .then((res) => {
+              if(res.ok) return res.text();
+              return res.text().then(err => {
+                return Promise.reject({
+                  status: res.status,
+                  statusText: res.statusText,
+                  errorMessage: err,
+                });
               });
+            })
+            .then((data) => {
+              const rawData = JSON.parse(data);
+              setMovies(rawData.Search);
+            })
+            .catch((err) => {
+              console.log(err);
             });
-          })
-          .then((data) => {
-            const rawData = JSON.parse(data);
-            console.log(rawData)
-            setMovies(rawData.Search);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-  
-      fetchData()
+        };
+        fetchData()
+      } else {
+        setMovies(prevSearch.location.state.previousMovies.movies);
+        prevSearch.location.state.previousMovies.movies = undefined;
+      }
+    }
+
+    useEffect(() => {
+      fetchMoviesCallback(search);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     return (

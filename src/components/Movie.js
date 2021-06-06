@@ -1,11 +1,14 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
+import Spinner from './Spinner';
 
-const Movie = () => {
+const Movie = (movies) => {
     const [movie, setMovie] = useState();
     const {id} = useParams();
     
     const URL = `http://www.omdbapi.com/?apikey=2b921791&i=${id}`;
+
+    const previousMovies = movies.location.state;
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -21,21 +24,19 @@ const Movie = () => {
                     });
                 })
                 .then((data) => {
-                    setMovie(JSON.parse(data));
+                    setTimeout(() => setMovie(JSON.parse(data)), 700);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         }
-
         fetchMovie();
     }, [URL]);
 
-    console.log(movie);
-
+    console.log(movie)
     return (
         <>
-            {movie === undefined ? '' :
+            {movie === undefined ? <Spinner /> :
                 <>
                     <h3>{movie.Title}</h3>
                     <img src={movie.Poster} alt="poster" />
@@ -45,9 +46,9 @@ const Movie = () => {
                     <div>{movie.Plot}</div>
                     <div>Actors: {movie.Actors}</div>
                     <div>Rating {movie.imdbRating}</div>
+                    <Link to={{pathname: "/", state: {previousMovies}}}>Back</Link>
                 </>
             }
-            <Link to="/">Back</Link>
         </>
     )
 }
