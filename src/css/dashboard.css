@@ -1,7 +1,8 @@
 .search-container {
   width: 100%;
-  padding: 0 25%;
+  position: relative;
   background: #142850;
+  height: 8vh;
 }
 
 #searchBar {
@@ -10,38 +11,35 @@
   width: 100%;
 }
 
-label {
-  color: white;
-}
-
-.form-row input[type="submit"] {
-  width: 100%;
-  height: 40px;
-  padding: 0;
-  background: #00a8cc;
-  border: 1px solid #00a8cc;
-  color: white;
-}
-
-.form-row input,
-.form-row select {
+.form-row input {
   height: 30px;
   margin: 0;
-  padding: 0 0 0 3px;
-  border-radius: 0.4em;
-  border: 1px rgb(204, 204, 204) solid;
+  padding: 0 0 0 7px;
+  border-radius: 0.6em;
+  border: 1px solid #27496d;
+  background: transparent;
+  color: white;
+  font-size: 14px;
 }
 
-.form-row select {
-  height: 32px;
+.form-row input::placeholder {
+  color: white;
+  font-size: 14px;
+}
+
+.form-row input:focus {
+  background: #27496d;
 }
 
 .form-row {
-  width: 100%;
+  width: 15%;
   display: flex;
   align-items: stretch;
-  padding: 20px;
   justify-content: space-between;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 
 .input-wrapper {

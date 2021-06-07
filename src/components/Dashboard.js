@@ -9,39 +9,6 @@ const Dashboard = (prevSearch) => {
     const [search, setSearch] = useState('');
     const [spinner, setSpinner] = useState();
 
-    // const fetchMoviesCallback = (search) => {
-    //   if(prevSearch.location.state === undefined || prevSearch.location.state.previousMovies.movies === undefined){
-    //     console.log('Undefined')
-    //     const fetchData = async () => {
-    //       const URL = `http://www.omdbapi.com/?apikey=2b921791&${search}`;
-    //       await fetch(URL, {method: 'GET', contentType: 'application/json'})
-    //         .then((res) => {
-    //           if(res.ok) return res.text();
-    //           return res.text().then(err => {
-    //             return Promise.reject({
-    //               status: res.status,
-    //               statusText: res.statusText,
-    //               errorMessage: err,
-    //             });
-    //           });
-    //         })
-    //         .then((data) => {
-    //           const rawData = JSON.parse(data);
-    //           console.log(rawData)
-    //           setSpinner(true);
-    //           setTimeout(() => {setSpinner(false); setMovies(rawData.Search)}, 700);
-    //         })
-    //         .catch((err) => {
-    //           console.log(err);
-    //         });
-    //     };
-    //     fetchData()
-    //   } else {
-    //     setMovies(prevSearch.location.state.previousMovies.movies);
-    //     prevSearch.location.state.previousMovies.movies = undefined;
-    //   }
-    // }
-
     const defaultFetch = async () => {
       const URL = "https://api.themoviedb.org/3/discover/movie?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US&sort_by=popularity.desc";
       const defaultFetchData = async () => {
@@ -85,7 +52,6 @@ const Dashboard = (prevSearch) => {
         })
         .then((data) => {
           const rawData = JSON.parse(data);
-          console.log(rawData)
           setSpinner(true);
           setTimeout(() => {setSpinner(false); setMovies(rawData.results)}, 700);
         })
@@ -97,7 +63,6 @@ const Dashboard = (prevSearch) => {
     };
 
     useEffect(() => {
-      // fetchMoviesCallback(search);
       defaultFetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

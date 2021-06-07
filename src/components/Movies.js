@@ -22,6 +22,10 @@ const Movies = ({movies}) => {
                     <div className="movieInfo">
                         <h3>{movie.title}</h3>
                         <div className="rating">{movie.vote_average}</div>
+                        <div className="overview">
+                            <h4>Overview</h4>
+                            <div>{movie.overview}</div>
+                        </div>
                     </div>
                 </Link>
             )) : ''}
