@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from 'react';
-import Movies from './Movies';
-import SearchBar from './SearchBar';
-import Spinner from './Spinner'
+import Movies from '../utils/Movies';
+import SearchBar from '../utils/SearchBar';
+import Spinner from '../utils/Spinner'
 
 
 const Dashboard = (prevSearch) => {
@@ -73,9 +73,12 @@ const Dashboard = (prevSearch) => {
 
 
     return (
-        <div className="dashboardContainer" style={style}>
-            <SearchBar state={[search, setSearch]}/>
-            {spinner === true ? <Spinner /> : <Movies movies = {movies}/> }
+        // <div className="dashboardContainer" style={style}>
+        //     <SearchBar state={[search, setSearch]}/>
+        //     {spinner === true ? <Spinner /> : <Movies movies = {movies}/> }
+        // </div>
+        <div>
+          Hello world
         </div>
     )
 };

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import Spinner from './Spinner';
+import Spinner from '../utils/Spinner';
 
 const Movie = (movies) => {
     const [movie, setMovie] = useState();

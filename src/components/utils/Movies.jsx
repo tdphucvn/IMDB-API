@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import '../css/movies.css';
+// import '../css/movies.css';
 
 const Movies = ({movies}) => {
     console.log(movies)
