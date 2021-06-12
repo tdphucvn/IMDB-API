@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     navList: {
         maxWidth: 300,
         width: '25vw',
+        minWidth: 170,
     },
 }));
 

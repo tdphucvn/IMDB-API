@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         marginRight: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     },
     button: {
         marginTop: theme.spacing(2),
@@ -98,6 +99,7 @@ const DiscoverBar = ({state}) => {
 
     const sendQuery = () => {
         const genre = genres.filter((genreEach) => (genreEach.state))
+        console.log([year, sort, genre])
         setQuery([year, sort, genre]);
     };
 
@@ -108,10 +110,10 @@ const DiscoverBar = ({state}) => {
                     <FormControl component="form" className={classes.formControl}>
                         <InputLabel>Sorted By:</InputLabel>
                         <Select name="sort" value={sort} onChange={handleSortChange} className={classes.select}>
-                            <MenuItem value={"populatiry.desc"}>Popularity</MenuItem>
-                            <MenuItem value={"revenue.desc"}>Revenue</MenuItem>
-                            <MenuItem value={"vote_average.desc"}>Vote Average</MenuItem>
-                            <MenuItem value={"release_date.desc"}>Release Date</MenuItem>
+                            <MenuItem value={"sort_by=populatiry.desc"}>Popularity</MenuItem>
+                            <MenuItem value={"sort_by=revenue.desc"}>Revenue</MenuItem>
+                            <MenuItem value={"sort_by=vote_average.desc"}>Vote Average</MenuItem>
+                            <MenuItem value={"sort_by=release_date.desc"}>Release Date</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl component="form" className={classes.formControl}>
