@@ -1,4 +1,4 @@
-import React from 'react';
+import {React} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Trending from './Trending';
 import Discover from './Discover';
@@ -8,6 +8,7 @@ import MovieHeader from '../utils/MovieHeader';
 import GeneralHeader from '../utils/GeneralHeader';
 
 const Dashboard = () => {
+
     return (
         <Router>
             <>

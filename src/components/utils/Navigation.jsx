@@ -1,5 +1,7 @@
-import React from 'react'
-import { Drawer, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+import { React} from 'react'
+import { Drawer, List, ListItemText, makeStyles } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import ListItem  from '@material-ui/core/ListItem';
 
 const useStyles = makeStyles((theme) => ({
     navList: {
@@ -9,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = ({menu}) => {
-
     const classes = useStyles();
 
     const [drawer, setDrawer] = menu;
@@ -22,14 +23,14 @@ const Navigation = ({menu}) => {
     };
 
     const navList = () => (
-        <div className={classes.navList} nClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
-            {["Trending", "Discover", "Search"].map((text, index) => (
-                <List>
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
+        <div className={classes.navList} onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+            <List>
+                {[["Trending", "/"], ["Discover", "/discover"], ["Search", "/search"]].map((item, index) => (
+                    <ListItem button key={item[0]} component={RouterLink} to={item[1]}>
+                        <ListItemText primary={item[0]} />
                     </ListItem>
-                </List>
-            ))}
+                ))}
+            </List>
         </div>
     );
 
