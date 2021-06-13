@@ -4,7 +4,6 @@ import Trending from './Trending';
 import Discover from './Discover';
 import Search from './Search';
 import Movie from './Movie';
-import MovieHeader from '../utils/MovieHeader';
 import GeneralHeader from '../utils/GeneralHeader';
 
 const Dashboard = () => {
@@ -13,7 +12,6 @@ const Dashboard = () => {
         <Router>
             <>
                 <Switch>
-                    <Route exact path="/movie/:id" component={MovieHeader}/>
                     <Route component={GeneralHeader}/>
                 </Switch>
                 <Switch>

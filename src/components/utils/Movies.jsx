@@ -2,7 +2,7 @@ import React from 'react'
 import {Link as RouterLink} from 'react-router-dom';
 import { Typography, Button, Card, Grid, Container, CardHeader, CardMedia, CardContent, CardActions, makeStyles, useScrollTrigger, Zoom, Fab } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
+import { Rating } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -47,10 +47,18 @@ function ScrollTop(props) {
     );
 };
 
-const Movies = ({movies, props}) => {
+const rating = (movie) => {
+    const rate = movie.vote_average / 2;
 
+    return (
+        <div>
+            <Rating defaultValue={rate} precision={0.1} readOnly max={5}/>
+        </div>
+    )
+}
+
+const Movies = ({movies, props}) => {
     const classes = useStyles();
-    
 
     const IMG_API = 'https://image.tmdb.org/t/p/w500/';
     return (
@@ -60,7 +68,7 @@ const Movies = ({movies, props}) => {
                     {movies.map((movie) => (
                         <Grid item xs={12} sm={6} md={4} key={movie.id}>
                             <Card>
-                                <CardHeader title={movie.title} subheader={movie.vote_average} className={classes.header}/>
+                                <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/>
                                 <CardMedia component="img" src={IMG_API + movie.poster_path}/>
                                 <CardContent className={classes.cardContent}>
                                     <Typography variant="body2" color="textSecondary" paragraph>

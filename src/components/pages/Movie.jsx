@@ -1,6 +1,5 @@
 import {React, useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import Spinner from '../utils/Spinner';
 
 const Movie = (movies) => {
     const [movie, setMovie] = useState();
@@ -36,7 +35,7 @@ const Movie = (movies) => {
     console.log(movie)
     return (
         <>
-            {movie === undefined ? <Spinner /> :
+            {movie === undefined ? '' :
                 <>
                     <h3>{movie.Title}</h3>
                     <img src={movie.Poster} alt="poster" />

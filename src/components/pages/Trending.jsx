@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import Movies from '../utils/Movies';
+import Hero from '../utils/Hero';
 
 const Dashboard = (prevSearch) => {
     const [movies, setMovies] = useState([]);
@@ -40,6 +41,7 @@ const Dashboard = (prevSearch) => {
 
     return (
         <>
+          <Hero />
           <Movies movies={movies}/>
         </>
     )

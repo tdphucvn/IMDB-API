@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
     },
     bottomGutter : {
-        marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(0),
+        height: 0
     }
 }));
 
@@ -26,17 +27,14 @@ const GeneralHeader = () => {
 
     return (
         <>
-            <AppBar position="fixed">
+            <AppBar position="fixed" color="transparent">
                 <Toolbar>
                     <IconButton onClick={showMenu} className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h4">
-                    <Link className={classes.link} component={RouterLink} to='/' color="inherit" underline="none">AMDT</Link>
-                    </Typography>
                 </Toolbar>
             </AppBar>
-            <Toolbar id="back-to-top-anchor" className={classes.bottomGutter} />
+            <div id="back-to-top-anchor" className={classes.bottomGutter}></div>
             {menu === true ? <Navigation menu={[menu, setMenu]}/> : ''}
         </>
     )

@@ -1,7 +1,10 @@
 import { React} from 'react'
-import { Drawer, List, ListItemText, makeStyles } from '@material-ui/core';
+import { Drawer, List, ListItemText, ListItemIcon, makeStyles } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import ListItem  from '@material-ui/core/ListItem';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import SearchIcon from '@material-ui/icons/Search';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 
 const useStyles = makeStyles((theme) => ({
     navList: {
@@ -26,8 +29,9 @@ const Navigation = ({menu}) => {
     const navList = () => (
         <div className={classes.navList} onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-                {[["Trending", "/"], ["Discover", "/discover"], ["Search", "/search"]].map((item, index) => (
+                {[["Trending", "/", <WhatshotIcon />], ["Discover", "/discover", <EmojiObjectsIcon />], ["Search", "/search", <SearchIcon />]].map((item, index) => (
                     <ListItem button key={item[0]} component={RouterLink} to={item[1]}>
+                        <ListItemIcon>{item[2]}</ListItemIcon>
                         <ListItemText primary={item[0]} />
                     </ListItem>
                 ))}
