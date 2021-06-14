@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(2),
     },
+    container: {
+        zIndex: 2,
+    }
 }));
 
 function ScrollTop(props) {
@@ -63,7 +66,7 @@ const Movies = ({movies, props}) => {
     const IMG_API = 'https://image.tmdb.org/t/p/w500/';
     return (
         <>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" className={classes.container}>
                 <Grid container justify="flex-start" spacing={3}>
                     {movies.map((movie) => (
                         <Grid item xs={12} sm={6} md={4} key={movie.id}>

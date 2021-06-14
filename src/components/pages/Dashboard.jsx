@@ -5,20 +5,22 @@ import Discover from './Discover';
 import Search from './Search';
 import Movie from './Movie';
 import GeneralHeader from '../utils/GeneralHeader';
+import Test from '../utils/Test';
 
 const Dashboard = () => {
 
     return (
         <Router>
             <>
-                <Switch>
+                {/* <Switch>
                     <Route component={GeneralHeader}/>
-                </Switch>
+                </Switch> */}
                 <Switch>
                     <Route exact path="/" component={Trending}/>
                     <Route exact path="/discover" component={Discover}/>
                     <Route exact path="/search" component={Search}/>
                     <Route exact path="/movie/:id" component={Movie}/>
+                    <Route exact path="/test" component={Test} />
                 </Switch>
             </>
         </Router>
