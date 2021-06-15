@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { Button, Container, Divider, Paper, makeStyles, Typography } from '@material-ui/core';
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const useStyles = makeStyles((theme) => ({
     outerContainer: {
         display: 'flex',
@@ -8,15 +9,53 @@ const useStyles = makeStyles((theme) => ({
     },
     innerContainer: {
         display: 'flex',
-        height: '30vh',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        alignItems: 'center', 
+        position: 'relative',
+        flexWrap: 'wrap',
+        height: '100vh'
     },
     filmContainer: {
         width: '15%',
-        
+        height: '30vh',
+        minWidth: 100, 
     },
     currentFilm: {
         width: '25%',
+        height: '26vh',
+        transform: 'scale(1.8)',
+    },
+    content: {
+        display: 'flex',
+        alignItems: 'strech',
+        height: '100%',
+        borderRadius: '5px',
+    },
+    contentImage: {
+        flex: 1.5,
+        background: 'red',
+        borderRadius: '5px 0 0 5px',
+    },
+    contentDescription: {
+        flex: 2,
+        background: 'blue',
+        borderRadius: '0 5px 5px 0',
+    },
+    button: {
+        height: 64,
+        width: 64,
+        borderRadius: '50%',
+        position: 'absolute',
+    },
+    backButton: {
+        top: '50%',
+        left: '5%',
+        transform: 'translate(0, -50%)',
+    },
+    nextButton: {
+        top: '50%',
+        right: '5%',
+        transform: 'translate(0, -50%)',
     }
 }));
 
@@ -119,17 +158,22 @@ const Test = () => {
 
     return (
         <div className={classes.outerContainer}>
-            <Button onClick={handleBack} disabled={backDisabled}>Back</Button>
             <Container maxWidth="lg" className={classes.innerContainer}>
+            <Button onClick={handleBack} disabled={backDisabled} className={`${classes.backButton} ${classes.button}`} variant="outlined"><ArrowBackIcon /></Button>
                 {/* {activeCards.map((activeCard) => (
                     <Paper className={classes.filmContainer} key={activeCard.index}><Typography>{activeCard.text}</Typography></Paper>
                 ))} */}
                 {activeCards.map((activeCard) => {
-                    if(activeCard === cards[activeCardIndex]) return (<Paper className={classes.currentFilm} key={activeCard.index}><Typography>{activeCard.text}</Typography></Paper>);
-                    return(<Paper className={classes.filmContainer} key={activeCard.index}><Typography>{activeCard.text}</Typography></Paper>);
+                    if(activeCard === cards[activeCardIndex]) return (<Paper className={classes.currentFilm} key={activeCard.index} elevation={12}>
+                        <div className={classes.content}>
+                            <div className={classes.contentImage}></div>
+                            <Typography className={classes.contentDescription}>{activeCard.text}</Typography>
+                        </div>
+                    </Paper>);
+                    return(<Paper className={classes.filmContainer} key={activeCard.index} elevation={2}><Typography>{activeCard.text}</Typography></Paper>);
                 })}
+            <Button onClick={handleNext} disabled={nextDisabled} className={`${classes.nextButton} ${classes.button}`} variant="outlined"><ArrowForwardIcon /></Button>
             </Container>
-            <Button onClick={handleNext} disabled={nextDisabled}>Next</Button>
         </div>
     )
 }
