@@ -5,7 +5,7 @@ import Discover from './Discover';
 import Search from './Search';
 import Movie from './Movie';
 import GeneralHeader from '../utils/GeneralHeader';
-import Test from '../utils/Test';
+import Landing from '../utils/Landing';
 
 const Dashboard = () => {
 
@@ -20,7 +20,7 @@ const Dashboard = () => {
                     <Route exact path="/discover" component={Discover}/>
                     <Route exact path="/search" component={Search}/>
                     <Route exact path="/movie/:id" component={Movie}/>
-                    <Route exact path="/test" component={Test} />
+                    <Route exact path="/test" component={Landing} />
                 </Switch>
             </>
         </Router>

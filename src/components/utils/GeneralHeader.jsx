@@ -27,11 +27,9 @@ const GeneralHeader = () => {
 
     return (
         <>
-            <AppBar position="fixed" color="transparent">
+            <AppBar position="fixed" color="transparent" style={{borderBottom: '1px solid #292f48'}}>
                 <Toolbar>
-                    <IconButton onClick={showMenu} className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+
                 </Toolbar>
             </AppBar>
             <div id="back-to-top-anchor" className={classes.bottomGutter}></div>
