@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     slider: {
-        width: '100vw',
+        width: '98vw',
         height: '50vh',
         position: 'absolute',
         top: '50%',
@@ -196,7 +196,7 @@ const Landing = () => {
     return (
         <div className={classes.outerContainer}>
             <div className={classes.slider}></div>
-            <Typography align="center" variant="h5" style={{color: '#292f48', position: 'absolute', top: '11vh', width: '100%'}}>Our weekly film suggestion exclusively for you!</Typography>
+            <Typography align="center" variant="h5" style={{color: 'white', position: 'absolute', top: '6vh', width: '100%'}}>Our weekly film suggestion exclusively for you!</Typography>
             <Container style={{maxWidth: '100%'}} className={classes.innerContainer}>
             <Button onClick={handleBack} disabled={backDisabled} className={`${classes.backButton} ${classes.button}`} variant="outlined"><ArrowBackIcon /></Button>
 

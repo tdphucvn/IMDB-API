@@ -105,7 +105,7 @@ const DiscoverBar = ({state}) => {
 
     return (
         <>
-            <Container maxWidth="lg" className={classes.container}>
+            <Container maxWidth="lg" className={classes.container} id="discover-container">
                 <FormGroup row>
                     <FormControl component="form" className={classes.formControl}>
                         <InputLabel>Sorted By:</InputLabel>
