@@ -1,9 +1,19 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
+import createSagaMiddleware from '@redux-saga/core';
+import { watcherSaga } from './sagas/rootSaga';
 import genreSlice from './GenresSlice';
 
+const sagaMiddleware = createSagaMiddleware();
+
+const reducer = combineReducers({
+    genre: genreSlice,
+})
 
 const store = configureStore({
-    reducer: genreSlice,
+    reducer,
+    middleware: [...getDefaultMiddleware({thunk: false}), sagaMiddleware],
 });
+
+sagaMiddleware.run(watcherSaga);
 
 export default store;

@@ -1,10 +1,13 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getGenres } from '../../redux/GenresSlice';
 
 const Test = () => {
-    const genres = useSelector((state) => state)
+    const dispatch = useDispatch();
 
+    const genres = useSelector((state) => state.genre)
     console.log(genres)
+
 
     return (
         <div style={{color: 'white'}}>

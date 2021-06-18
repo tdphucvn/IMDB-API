@@ -3,6 +3,9 @@ import { Button, Container, Divider, Paper, makeStyles, Typography, GridList, Gr
 import Rating from '@material-ui/lab/Rating';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+import { useSelector } from 'react-redux';
+
 const useStyles = makeStyles((theme) => ({
     outerContainer: {
         display: 'flex',
@@ -193,6 +196,8 @@ const Landing = () => {
 
     const IMG_API = 'https://image.tmdb.org/t/p/w500/';
 
+    const { response } = useSelector((state) => state.genre);
+
     return (
         <div className={classes.outerContainer}>
             <div className={classes.slider}></div>
@@ -201,55 +206,64 @@ const Landing = () => {
             <Button onClick={handleBack} disabled={backDisabled} className={`${classes.backButton} ${classes.button}`} variant="outlined"><ArrowBackIcon /></Button>
 
                 {activeCards.map((activeCard) => {
-                    if(activeCard === cards[activeCardIndex]) return (
-                        <>
-                        <div className={classes.filmContainer} style={{width: '20vw'}}></div>
-                        <Paper className={classes.currentFilm} key={activeCard.id} elevation={20}>
-                            <div className={classes.content}>
-                                <GridList cols={2} style={{width: '100%', margin: 0}}>
-                                    <GridListTile style={{height: '100%', paddingRight: '0px'}} className={classes.contentImage}>
-                                        <img src={IMG_API + activeCard.poster_path} alt="" />
-                                    </GridListTile>
-                                    <GridListTile style={{height: '100%'}} className={classes.contentDescription}>
-                                        <div style={{maxWidth: '90%', margin: 'auto', position: 'relative', height: '100%'}}>
-                                            <Typography color="textPrimary" variant="h4" style={{margin: '15px 0'}}>{activeCard.title}</Typography>
-                                            <Divider></Divider>
-                                            <TableContainer>
-                                                <Table aria-label="simple table">
-                                                    <TableBody>
-                                                        <TableRow>
-                                                            <TableCell style={{padding: '8px 16px', border: 'none'}}>Genre:</TableCell>
-                                                            <TableCell style={{padding: '8px 16px', border: 'none'}}>Fiction</TableCell>
-                                                        </TableRow>
-                                                        <TableRow>
-                                                            <TableCell style={{padding: '8px 16px', border: 'none'}}>Release Date:</TableCell>
-                                                            <TableCell style={{padding: '8px 16px', border: 'none'}}>{activeCard.release_date}</TableCell>
-                                                        </TableRow>
-                                                        <TableRow>
-                                                            <TableCell style={{padding: '8px 16px', border: 'none'}}>Overview</TableCell>
-                                                            <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>{activeCard.overview.length > 100 ? activeCard.overview.substring(0, 97) + '...' : activeCard.overview}</TableCell>
-                                                        </TableRow>
-                                                    </TableBody>
-                                                </Table>
-                                            </TableContainer>
-                                            <div style={{width: '100%', minHeight: 100, height: '25%', position: 'absolute', bottom: 0, display: 'flex', borderTop: '1px solid rgba(0, 0, 0, 0.12)'}}>
-                                                <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-                                                    <Typography variant="h4">{Math.floor(activeCard.popularity)}</Typography>
-                                                    <Typography>Popularity</Typography>
+                    if(activeCard === cards[activeCardIndex]){
+                        let activeCardGenres = [];
+                        if(activeCard.genre_ids && response) {
+                            activeCard.genre_ids.forEach(index => {
+                                const genre = response.filter(i => i.id === index);
+                                activeCardGenres.push(...genre);
+                            });
+                        };
+                        return (
+                            <div key={activeCard.id}>
+                                <div className={classes.filmContainer} style={{width: '20vw'}}></div>
+                                <Paper className={classes.currentFilm} elevation={20}>
+                                    <div className={classes.content}>
+                                        <GridList cols={2} style={{width: '100%', margin: 0}}>
+                                            <GridListTile style={{height: '100%', paddingRight: '0px'}} className={classes.contentImage}>
+                                                <img src={IMG_API + activeCard.poster_path} alt="" />
+                                            </GridListTile>
+                                            <GridListTile style={{height: '100%'}} className={classes.contentDescription}>
+                                                <div style={{maxWidth: '90%', margin: 'auto', position: 'relative', height: '100%'}}>
+                                                    <Typography color="textPrimary" variant="h4" style={{margin: '15px 0'}}>{activeCard.title}</Typography>
+                                                    <Divider></Divider>
+                                                    <TableContainer>
+                                                        <Table aria-label="simple table">
+                                                            <TableBody>
+                                                                <TableRow>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>Genre:</TableCell>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>{activeCardGenres.map((genre) => (`${genre.name}, `))}</TableCell>
+                                                                </TableRow>
+                                                                <TableRow>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>Release Date:</TableCell>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>{activeCard.release_date}</TableCell>
+                                                                </TableRow>
+                                                                <TableRow>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>Overview</TableCell>
+                                                                    <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>{activeCard.overview.length > 100 ? activeCard.overview.substring(0, 97) + '...' : activeCard.overview}</TableCell>
+                                                                </TableRow>
+                                                            </TableBody>
+                                                        </Table>
+                                                    </TableContainer>
+                                                    <div style={{width: '100%', minHeight: 100, height: '25%', position: 'absolute', bottom: 0, display: 'flex', borderTop: '1px solid rgba(0, 0, 0, 0.12)'}}>
+                                                        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+                                                            <Typography variant="h4">{Math.floor(activeCard.popularity)}</Typography>
+                                                            <Typography>Popularity</Typography>
+                                                        </div>
+                                                        <Divider orientation="vertical"></Divider>
+                                                        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+                                                            <Rating value={activeCard.vote_average / 2} precision={0.1} max={5} readOnly/>
+                                                            <Typography>IMDB Rating</Typography>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <Divider orientation="vertical"></Divider>
-                                                <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-                                                    <Rating value={activeCard.vote_average / 2} precision={0.1} max={5} readOnly/>
-                                                    <Typography>IMDB Rating</Typography>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </GridListTile>
-                                </GridList>
+                                            </GridListTile>
+                                        </GridList>
+                                    </div>
+                                </Paper>
                             </div>
-                        </Paper>
-                        </>
-                    );
+                        );
+                    };
                     if (activeCard.overview !== '')
                     return(<Paper className={classes.filmContainer} key={activeCard.id} elevation={10}>
                         <GridList style={{height: '100%'}}>
@@ -259,7 +273,7 @@ const Landing = () => {
                         </GridList>
                     </Paper>);
                     return(
-                        <div className={classes.filmContainerTransparent}></div>
+                        <div key={activeCard.id} className={classes.filmContainerTransparent}></div>
                     );
                 })}
             <Button onClick={handleNext} disabled={nextDisabled} className={`${classes.nextButton} ${classes.button}`} variant="outlined"><ArrowForwardIcon /></Button>
