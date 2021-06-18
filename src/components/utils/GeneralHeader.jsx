@@ -15,14 +15,16 @@ const useStyles = makeStyles((theme) => ({
     },
     navBar: {
         display: 'flex',
+        width: '90%',
+        margin: 'auto'
     },
     flexGrow: {
         flexGrow: 1
     },
     linksContainer: {
-        width: '20%',
+        width: '10%',
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     }
 }));
 
@@ -40,10 +42,9 @@ const GeneralHeader = () => {
         <>
             <AppBar position="static" color="transparent" style={{borderBottom: '1px solid #292f48'}}>
                 <Toolbar className={classes.navBar}>
-                    <Typography variant="h4" style={{color: 'white'}}>AMDT</Typography>
+                        <Link href="#" underline="none"><Typography variant="h4" style={{color: 'white'}}>AMDT</Typography></Link>
                     <div className={classes.flexGrow}></div>
                     <div className={classes.linksContainer}>
-                        <Link href="#" underline="none" style={{color: 'white'}}><Typography>Trending</Typography></Link>
                         <Link href="#discover-container" underline="none" style={{color: 'white'}}><Typography>Discover</Typography></Link>
                         <Link component={RouterLink} to="/search" underline="none" style={{color: 'white'}}><Typography>Search</Typography></Link>
                     </div>

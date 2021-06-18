@@ -5,7 +5,7 @@ import GeneralHeader from '../utils/GeneralHeader';
 import Discover from './Discover';
 import Search from './Search';
 
-const Dashboard = (prevSearch) => {
+const Main = () => {
 
     return (
         <>
@@ -17,4 +17,4 @@ const Dashboard = (prevSearch) => {
     )
 };
 
-export default Dashboard
+export default Main

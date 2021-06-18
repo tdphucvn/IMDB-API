@@ -1,6 +1,6 @@
 import {React} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Trending from './Trending';
+import Main from './Main';
 import Discover from './Discover';
 import Search from './Search';
 import Movie from './Movie';
@@ -12,7 +12,7 @@ const Dashboard = () => {
     return (
         <Router>
                 <Switch>
-                    <Route exact path="/" component={Trending}/>
+                    <Route exact path="/" component={Main}/>
                     <Route exact path="/discover" component={Discover}/>
                     <Route exact path="/search" component={Search}/>
                     <Route exact path="/movie/:id" component={Movie}/>

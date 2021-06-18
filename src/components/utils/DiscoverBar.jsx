@@ -1,13 +1,7 @@
-import { React, useState, useEffect } from 'react';
-import { Container, FormControl, FormGroup, FormControlLabel, Checkbox, Select, InputLabel, MenuItem, Button, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+import { FormGroup, FormControl, InputLabel, Select, MenuItem, Button, FormControlLabel, Checkbox, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    select: {
-        minWidth: 150,
-    },
-    container: {
-        marginBottom: theme.spacing(2),
-    },
     formControl: {
         marginRight: theme.spacing(2),
         marginBottom: theme.spacing(2),
@@ -15,16 +9,22 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(3), 
-    }
+    },
+    select: {
+        minWidth: 150,
+    },
 }));
 
-const DiscoverBar = ({state}) => {
+const DiscoverBar = ({state, genresProps}) => {
     const classes = useStyles();
+    
     const [sort, setSort] = useState('');
     const [year, setYear] = useState('');
-    const [genres, setGenre] = useState([]);
     const [query, setQuery] = state;
+    const [genres, setGenres] = genresProps;
 
+    console.log(genres);
+    
     const handleSortChange = (event) => {
         setSort(event.target.value);
     };
@@ -41,7 +41,7 @@ const DiscoverBar = ({state}) => {
         };
         const foundGenre = genres.find(checkID);
         foundGenre.state ? foundGenre.state = false : foundGenre.state = true;
-        setGenre(genres.map((genreMap) => genreMap.id === foundGenre.id ? foundGenre : genreMap));
+        setGenres(genres.map((genreMap) => genreMap.id === foundGenre.id ? foundGenre : genreMap));
         console.log(genres);
     };
 
@@ -60,43 +60,6 @@ const DiscoverBar = ({state}) => {
 
     getYearsArray(yearsArray);
 
-    const getGenre = () => {
-        const fetchGenre = async () => {
-            const URL = "https://api.themoviedb.org/3/genre/movie/list?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US";
-            const defaultFetchGenre = async () => {
-                await fetch(URL, {method: 'GET', contentType: 'application/json'})
-                    .then((res) => {
-                        if(res.ok) return res.text();
-                        return res.text().then(err => {
-                        return Promise.reject({
-                            status: res.status,
-                            statusText: res.statusText,
-                            errorMessage: err,
-                        });
-                        });
-                    })
-                    .then((data) => {
-                        const rawData = JSON.parse(data);
-                        const dataEdit = rawData.genres.map((genre) => {
-                            genre.state = false;
-                            return genre;
-                        });
-                        console.log(dataEdit);
-                        setGenre(dataEdit);
-                    })
-                    .catch((err) => {
-                    console.log(err);
-                    });
-            };
-            defaultFetchGenre();
-        };
-        fetchGenre()
-    };
-
-    useEffect(() => {
-        getGenre();
-    }, []);
-
     const sendQuery = () => {
         const genre = genres.filter((genreEach) => (genreEach.state))
         console.log([year, sort, genre])
@@ -104,12 +67,11 @@ const DiscoverBar = ({state}) => {
     };
 
     return (
-        <>
-            <Container maxWidth="lg" className={classes.container} id="discover-container">
-                <FormGroup row>
+        <React.Fragment>
+            <FormGroup row>
                     <FormControl component="form" className={classes.formControl}>
-                        <InputLabel>Sorted By:</InputLabel>
-                        <Select name="sort" value={sort} onChange={handleSortChange} className={classes.select}>
+                        <InputLabel style={{color: 'white'}}>Sorted By:</InputLabel>
+                        <Select name="sort" value={sort} onChange={handleSortChange} className={classes.select} style={{color: 'white'}}>
                             <MenuItem value={"sort_by=populatiry.desc"}>Popularity</MenuItem>
                             <MenuItem value={"sort_by=revenue.desc"}>Revenue</MenuItem>
                             <MenuItem value={"sort_by=vote_average.desc"}>Vote Average</MenuItem>
@@ -117,8 +79,8 @@ const DiscoverBar = ({state}) => {
                         </Select>
                     </FormControl>
                     <FormControl component="form" className={classes.formControl}>
-                        <InputLabel>Released Year</InputLabel>
-                        <Select name="release-year" value={year} onChange={handleYearChange} className={classes.select}>
+                        <InputLabel style={{color: 'white'}}>Released Year</InputLabel>
+                        <Select name="release-year" value={year} onChange={handleYearChange} className={classes.select}  style={{color: 'white', borderColor: 'white'}}>
                             {yearsArray.map((year) => (
                                 <MenuItem key={year} value={year}>{year}</MenuItem>
                             ))}
@@ -128,13 +90,12 @@ const DiscoverBar = ({state}) => {
                 <FormGroup row>
                     {genres.map((genre) => (
                         <FormControl key={genre.id}>
-                            <FormControlLabel control={<Checkbox checked={genre.state} value={genre.id} onChange={handleGenreChange}/>} label={genre.name}/>
+                            <FormControlLabel control={<Checkbox checked={genre.state} value={genre.id} onChange={handleGenreChange} style={{color: 'white'}}/>} label={genre.name}/>
                         </FormControl>
                     ))}
                 </FormGroup>
-                <Button onClick={sendQuery} variant="outlined" color="primary" className={classes.button}>Discover</Button>
-            </Container>
-        </>
+                <Button onClick={sendQuery} variant="outlined" color="secondary" className={classes.button}>Discover</Button>
+        </React.Fragment>
     )
 }
 

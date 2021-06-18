@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import SearchBar from '../utils/SearchBar';
 import Movies from '../utils/Movies';
-import DiscoverMovies from '../utils/DiscoverMovies';
+import TrendingMovies from '../utils/TrendingMovies';
 
 
 const Search = () => {
@@ -69,7 +69,7 @@ const Search = () => {
     return (
         <>
             <SearchBar state={[query, setQuery]}/>
-            {movies.length > 0 ? <Movies movies={movies}/> : <DiscoverMovies movies={trendingMovies}/>}
+            {movies.length > 0 ? <Movies movies={movies}/> : <TrendingMovies movies={trendingMovies}/>}
         </>
     )
 }
