@@ -121,7 +121,6 @@ const Landing = () => {
             })
             .then((data) => {
               const rawData = JSON.parse(data);
-              console.log(rawData)
               setCards(rawData.results)
             })
             .catch((err) => {
@@ -157,9 +156,7 @@ const Landing = () => {
     };
 
     const renderCards = (index) => {
-        console.log('render')
         if(cards.length === 0) return;
-        console.log('Pass');
         let nums = [];
         let cardsArray = []
         if(index < 2) {
@@ -191,7 +188,6 @@ const Landing = () => {
         };
         setActiveCards([]);
         setActiveCards(cardsArray);
-        console.log(cardsArray);    
     };
 
     const IMG_API = 'https://image.tmdb.org/t/p/w500/';

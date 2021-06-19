@@ -23,8 +23,6 @@ const DiscoverBar = ({state, genresProps}) => {
     const [query, setQuery] = state;
     const [genres, setGenres] = genresProps;
 
-    console.log(genres);
-    
     const handleSortChange = (event) => {
         setSort(event.target.value);
     };
@@ -42,7 +40,6 @@ const DiscoverBar = ({state, genresProps}) => {
         const foundGenre = genres.find(checkID);
         foundGenre.state ? foundGenre.state = false : foundGenre.state = true;
         setGenres(genres.map((genreMap) => genreMap.id === foundGenre.id ? foundGenre : genreMap));
-        console.log(genres);
     };
 
     let yearsArray = [];
@@ -62,7 +59,6 @@ const DiscoverBar = ({state, genresProps}) => {
 
     const sendQuery = () => {
         const genre = genres.filter((genreEach) => (genreEach.state))
-        console.log([year, sort, genre])
         setQuery([year, sort, genre]);
     };
 

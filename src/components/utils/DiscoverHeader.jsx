@@ -24,6 +24,7 @@ const DiscoverHeader = ({state, moviesComponent}) => {
     const classes = useStyles();
     const [genres, setGenres] = useState([]);
     const [value, setValue] = moviesComponent;
+    const [innerValue, setInnerValue] = useState(0);
     const [customDiscover, setCustomDiscover] = useState(false);
 
     const getGenre = () => {
@@ -47,7 +48,6 @@ const DiscoverHeader = ({state, moviesComponent}) => {
                             genre.state = false;
                             return genre;
                         });
-                        console.log(dataEdit);
                         setGenres(dataEdit);
                     })
                     .catch((err) => {
@@ -65,7 +65,8 @@ const DiscoverHeader = ({state, moviesComponent}) => {
 
 
     const handleTabChange = (event, newValue) => {
-        setValue(newValue);
+        setInnerValue(newValue);
+        setTimeout(function(){setValue(newValue)}, 500);
     };
 
     const handleCutomDiscover = () => {
@@ -77,7 +78,7 @@ const DiscoverHeader = ({state, moviesComponent}) => {
             <Container maxWidth="lg" className={classes.container} id="discover-container">
                 <div className={classes.discoverNavigation}>
                     <Typography variant="h4" style={{color: 'white'}} gutterBottom={false}>Discover latest movies</Typography>
-                    <Tabs value={value} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
+                    <Tabs value={innerValue} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
                         <Tab label="Trending" style={{color: 'white'}}/>
                         <Tab label="Revenue" style={{color: 'white'}}/>
                         <Tab label="Latest" style={{color: 'white'}}/>

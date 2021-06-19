@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react'
-import Movies from '../utils/Movies';
 import DiscoverHeader from '../utils/DiscoverHeader';
 import DiscoverMovies from '../utils/DiscoverMovies';
 
@@ -28,7 +27,6 @@ const Discover = () => {
             })
             .then((data) => {
               const rawData = JSON.parse(data);
-              console.log(rawData)
               setMovies(rawData.results)
             })
             .catch((err) => {
@@ -40,15 +38,17 @@ const Discover = () => {
 
   
     useEffect(() => {
+        if(query.length < 1) return;
         defaultFetch(query);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query]);
 
+    console.log(movies, query)
+
     return (
         <>
             <DiscoverHeader state={[query, setQuery]} moviesComponent={[component, setComponent]} />
-            <DiscoverMovies state={component} />
-            {/* {movies !== undefined || null ? <Movies movies={movies}/> : ''} */}
+            <DiscoverMovies state={component} searchedMovies={movies}/>
         </>
     )
 }
