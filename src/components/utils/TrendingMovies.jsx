@@ -19,7 +19,7 @@ const TrendingMovies = ({movies}) => {
             <Typography align="center" variant="h5" color="textPrimary" gutterBottom={true}>Last Week Trending Films</Typography>
             <GridList cols={3} className={classes.gridList}>
                 {movies.map(movie => (
-                    <GridListTile component={RouterLink} to={`/movies/${movie.id}`} style={{height: '100%'}}>
+                    <GridListTile key={movie.id} component={RouterLink} to={`/movies/${movie.id}`} style={{height: '100%'}}>
                         <img src={IMG_API + movie.poster_path} alt={movie.title} />
                         <GridListTileBar title={movie.title}/>
                     </GridListTile>

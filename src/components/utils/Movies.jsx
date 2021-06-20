@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {Link as RouterLink} from 'react-router-dom';
-import { Typography, Button, Card, Grid, Container, CardHeader, CardMedia, CardContent, CardActions, makeStyles, useScrollTrigger, Zoom, Fab } from '@material-ui/core';
+import { Typography, Button, Card, Grid, Container, CardHeader, CardMedia, CardContent, CardActions, makeStyles, useScrollTrigger, Zoom, Fab, Badge, Collapse } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { Rating } from '@material-ui/lab';
+
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     header: {
         minHeight: '100px',
-    },
-    cardContent: {
-        minHeight: '80px',
     },
     toTopButton: {
         position: 'fixed',
@@ -18,6 +16,21 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         zIndex: 2,
+    },
+    cardContent: {
+        '& *': {
+            color: 'white'
+        }
+    },
+    ratingBadge: {
+        color: '#73620F',
+        '& .MuiBadge-anchorOriginTopRightRectangle': {
+            backgroundColor: '#FFDC28',
+            padding: '2px 8px'
+        }
+    },
+    moreButton: {
+        margin: 'auto'
     }
 }));
 
@@ -51,41 +64,75 @@ function ScrollTop(props) {
 };
 
 const rating = (movie) => {
-    const rate = movie.vote_average / 2;
+    const rate = movie.vote_average;
 
     return (
-        <div>
-            <Rating defaultValue={rate} precision={0.1} readOnly max={5}/>
-        </div>
+        <Typography>{rate}</Typography>
     )
-}
+} 
 
 const Movies = ({movies, props}) => {
     const classes = useStyles();
+    const { response } = useSelector((state) => state.genre);
+
+    const middleIndex = Math.floor(movies.length / 2);
+    const firstPartArray = movies.slice(0, middleIndex);
+    const secondPartArray = movies.slice(middleIndex, movies.length);
+
+    const [moviesToDisplay, setMoviesToDisplay] = useState(firstPartArray);
+
+    const [secondPartDisplayed, setSecondPartDisplayed] = useState(false);
 
     const IMG_API = 'https://image.tmdb.org/t/p/w500/';
+
+    const handleShowMore = () => {
+        setSecondPartDisplayed((state) => !state);
+    };
+
+    useEffect(() => {
+        if(secondPartDisplayed && moviesToDisplay.length > 0) { setMoviesToDisplay([...moviesToDisplay, ...secondPartArray]) };
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [secondPartDisplayed])
+
+    console.log(moviesToDisplay);
+
     return (
         <>
             <Container maxWidth="lg" className={classes.container}>
-                <Grid container justify="flex-start" spacing={3}>
-                    {movies.map((movie) => (
-                        <Grid item xs={12} sm={6} md={4} key={movie.id}>
-                            <Card>
-                                <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/>
-                                <CardMedia component="img" src={IMG_API + movie.poster_path}/>
-                                <CardContent className={classes.cardContent}>
-                                    <Typography variant="body2" color="textSecondary" paragraph>
-                                        {movie.overview.length > 100 ? movie.overview.substring(0,100) + '...' : movie.overview}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button color="primary" component={RouterLink} to={`/movie/${movie.id}`}>More</Button>
-                                    <Button color="secondary">Trailer</Button>
-                                </CardActions>
-                            </Card>
+                <Grid container justify="flex-start" spacing={4}>
+                    {firstPartArray.map((movie) => {
+                        const {title, release_date} = movie;
+                        let activeCardGenres = [];
+                        if(movie.genre_ids && response) {
+                            movie.genre_ids.forEach(index => {
+                                const genre = response.filter(i => i.id === index);
+                                activeCardGenres.push(...genre);
+                            });
+                        };
+                        return(
+                        <Grid item xs={12} sm={6} md={3} key={movie.id}>
+                            <Badge badgeContent={rating(movie)} className={classes.ratingBadge}>
+                                <Card style={{backgroundColor: 'transparent'}}>
+                                    {/* <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/> */}
+                                    <CardMedia component="img" src={IMG_API + movie.poster_path} style={{height: '50vh', maxHeight: '600px'}}/>
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography varaint="body2" color="textSecondary">
+                                            {release_date && release_date.substring(0,4)} / {activeCardGenres[0] && activeCardGenres[0].name}
+                                        </Typography>
+                                        <Typography variant="body2" color="textPrimary" paragraph>
+                                            {title ? title : 'No title'}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Badge>
                         </Grid>
-                    ))}
-                </Grid>
+                        )
+                    })}
+                </Grid>                
+                <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Button color="secondary" onClick={handleShowMore} variant="outlined" size="large" className={classes.moreButton}>Show more</Button>
+                </div>
             </Container>
             <ScrollTop {...props}>
                 <Fab color="secondary" size="small" aria-label="scroll back to top">

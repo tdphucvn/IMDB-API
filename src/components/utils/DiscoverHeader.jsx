@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const DiscoverHeader = ({state, moviesComponent}) => {
     const classes = useStyles();
+    const [searchQuery, setSearchQuery] = state;
     const [genres, setGenres] = useState([]);
     const [value, setValue] = moviesComponent;
     const [innerValue, setInnerValue] = useState(0);
-    const [customDiscover, setCustomDiscover] = useState(false);
+    const [accordionExpanded, setAccordionExpanded] = useState(false);
 
     const getGenre = () => {
         const fetchGenre = async () => {
@@ -66,11 +67,11 @@ const DiscoverHeader = ({state, moviesComponent}) => {
 
     const handleTabChange = (event, newValue) => {
         setInnerValue(newValue);
-        setTimeout(function(){setValue(newValue)}, 500);
+        setTimeout(function(){setValue(newValue); setSearchQuery([])}, 500);
     };
 
     const handleCutomDiscover = () => {
-        customDiscover ? setCustomDiscover(false) : setCustomDiscover(true);
+        accordionExpanded ? setAccordionExpanded(false) : setAccordionExpanded(true);
     };
 
     return (
@@ -79,17 +80,17 @@ const DiscoverHeader = ({state, moviesComponent}) => {
                 <div className={classes.discoverNavigation}>
                     <Typography variant="h4" style={{color: 'white'}} gutterBottom={false}>Discover latest movies</Typography>
                     <Tabs value={innerValue} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
-                        <Tab label="Trending" style={{color: 'white'}}/>
-                        <Tab label="Revenue" style={{color: 'white'}}/>
-                        <Tab label="Latest" style={{color: 'white'}}/>
+                        <Tab label="Trending" style={{color: 'white'}} disabled={accordionExpanded}/>
+                        <Tab label="Revenue" style={{color: 'white'}} disabled={accordionExpanded}/>
+                        <Tab label="Latest" style={{color: 'white'}} disabled={accordionExpanded}/>
                     </Tabs>
                 </div>
-                <Accordion onChange={handleCutomDiscover} style={{color: 'white', background: 'transparent', borderBottom: '1px solid white'}}>
+                <Accordion onChange={() => handleCutomDiscover()} style={{color: 'white', background: 'transparent', borderBottom: '1px solid white'}} >
                     <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
                         <Typography variant="h6">Custom Search Options</Typography>
                     </AccordionSummary>
                     <AccordionDetails style={{display: 'block'}}>
-                        {customDiscover && <DiscoverBar state={state} genresProps={[genres, setGenres]}/>}
+                        <DiscoverBar state={state} genresProps={[genres, setGenres]} accordion={accordionExpanded}/>
                     </AccordionDetails>
                 </Accordion>
             </Container>

@@ -14,8 +14,19 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 150,
     },
 }));
+const getYearsArray = (ar) => {
+    const date = new Date();
+    let currentYear = date.getFullYear();
+    let index = 0;
+    while (index < 5) {
+        ar.push(currentYear);
+        --currentYear;
+        ++index;
+    };
+    return ar;
+}
 
-const DiscoverBar = ({state, genresProps}) => {
+const DiscoverBar = ({state, genresProps, accordion}) => {
     const classes = useStyles();
     
     const [sort, setSort] = useState('');
@@ -42,22 +53,10 @@ const DiscoverBar = ({state, genresProps}) => {
         setGenres(genres.map((genreMap) => genreMap.id === foundGenre.id ? foundGenre : genreMap));
     };
 
-    let yearsArray = [];
-
-    const getYearsArray = (ar) => {
-        const date = new Date();
-        let currentYear = date.getFullYear();
-        let index = 0;
-        while (index < 5) {
-            ar.push(currentYear);
-            --currentYear;
-            ++index;
-        };
-    }
-
-    getYearsArray(yearsArray);
+    const yearsArray = getYearsArray([]);
 
     const sendQuery = () => {
+        if(!accordion) {setQuery([]); return};
         const genre = genres.filter((genreEach) => (genreEach.state))
         setQuery([year, sort, genre]);
     };
