@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Container, makeStyles, Typography, Tabs, Tab, Button, Accordion, AccordionSummary, AccordionDetails, AccordionActions } from '@material-ui/core';
+import { Container, makeStyles, Typography, Tabs, Tab, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import DiscoverBar from './DiscoverBar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 

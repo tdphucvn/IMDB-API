@@ -1,5 +1,4 @@
-import {React, useState, useEffect} from 'react';
-import Movies from '../utils/Movies';
+import {React} from 'react';
 import Landing from '../utils/Landing';
 import GeneralHeader from '../utils/GeneralHeader';
 import Discover from './Discover';

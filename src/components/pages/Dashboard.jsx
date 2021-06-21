@@ -4,7 +4,6 @@ import Main from './Main';
 import Discover from './Discover';
 import Search from './Search';
 import Movie from './Movie';
-import GeneralHeader from '../utils/GeneralHeader';
 import Test from '../utils/Test';
 
 const Dashboard = () => {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Link as RouterLink} from 'react-router-dom';
-import { Typography, Button, Card, Grid, Container, CardHeader, CardMedia, CardContent, CardActions, makeStyles, useScrollTrigger, Zoom, Fab, Badge, Collapse } from '@material-ui/core';
+import { Typography, Button, Card, Grid, Container,  CardMedia, CardContent, makeStyles, useScrollTrigger, Zoom, Fab, Badge } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { useSelector } from 'react-redux';
@@ -76,10 +75,9 @@ const Movies = ({movies, props}) => {
     const { response } = useSelector((state) => state.genre);
 
     const middleIndex = Math.floor(movies.length / 2);
-    const firstPartArray = movies.slice(0, middleIndex);
     const secondPartArray = movies.slice(middleIndex, movies.length);
 
-    const [moviesToDisplay, setMoviesToDisplay] = useState(firstPartArray);
+    const [moviesToDisplay, setMoviesToDisplay] = useState([]);
 
     const [secondPartDisplayed, setSecondPartDisplayed] = useState(false);
 
@@ -95,13 +93,20 @@ const Movies = ({movies, props}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [secondPartDisplayed])
 
+    useEffect(() => {
+        const ar = movies.slice(0, middleIndex);
+        secondPartDisplayed ? setSecondPartDisplayed(false) : setSecondPartDisplayed(false);
+        setMoviesToDisplay([...ar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [movies]);
+
     console.log(moviesToDisplay);
 
     return (
         <>
             <Container maxWidth="lg" className={classes.container}>
                 <Grid container justify="flex-start" spacing={4}>
-                    {firstPartArray.map((movie) => {
+                    {moviesToDisplay.map((movie) => {
                         const {title, release_date} = movie;
                         let activeCardGenres = [];
                         if(movie.genre_ids && response) {

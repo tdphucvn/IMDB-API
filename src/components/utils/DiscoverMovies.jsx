@@ -44,7 +44,6 @@ const setSearchOption = (state) => {
 
 const DiscoverMovies = ({state, searchQuery}) => {
     const [movies, setMovies] = useState([]);
-    const [searchType, setSearchType] = useState(TRENDING);
 
     const fetchMovies = async (searchOptions) => {
         const {URL, option} = searchOptions;
@@ -74,7 +73,6 @@ const DiscoverMovies = ({state, searchQuery}) => {
     useEffect(() => {
         if(searchQuery && searchQuery.length > 0){
             console.log('Not empty search', searchQuery)
-            setSearchType(SEARCH);
             const queryGenresRaw = searchQuery[2] !== undefined && searchQuery[2].length !== 0 ? searchQuery[2].map((genre) => {return genre.id + '%2C'}) : '';
             const queryGenres = queryGenresRaw.toString().replace(',', '');
             const queryString = (searchQuery[1] !== undefined && searchQuery[1].length !== '' ? searchQuery[1] + '&' : '') + (searchQuery[0] !== undefined && searchQuery[0].length !== '' ? 'year=' + searchQuery[0] + '&' : '') + 'with_genres=' + queryGenres;

@@ -1,6 +1,5 @@
 import {React, useState} from 'react'
-import { Typography, AppBar, Toolbar, IconButton, makeStyles } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Typography, AppBar, Toolbar,  makeStyles } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link  from '@material-ui/core/Link';
 import Navigation from './Navigation';
@@ -30,11 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 const GeneralHeader = () => {
     const [menu, setMenu] = useState(false);
-
-    const showMenu = () => {
-        if(menu) {setMenu(false); return;}
-        setMenu(true);
-    };
 
     const classes = useStyles();
 
