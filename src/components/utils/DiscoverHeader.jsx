@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         marginBottom: theme.spacing(2),
         color: 'white',
+        
     },
     discoverTabs: {
         width: '50%',
@@ -85,7 +86,7 @@ const DiscoverHeader = ({state, moviesComponent}) => {
                         <Tab label="Latest" style={{color: 'white'}} disabled={accordionExpanded}/>
                     </Tabs>
                 </div>
-                <Accordion onChange={() => handleCutomDiscover()} style={{color: 'white', background: 'transparent', borderBottom: '1px solid white'}} >
+                <Accordion onChange={() => handleCutomDiscover()} style={{color: 'white', background: 'transparent', borderBottom: '1px solid white', marginBottom: '30px'}} >
                     <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
                         <Typography variant="h6">Custom Search Options</Typography>
                     </AccordionSummary>

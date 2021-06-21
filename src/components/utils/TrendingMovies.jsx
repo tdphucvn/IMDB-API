@@ -16,7 +16,7 @@ const TrendingMovies = ({movies}) => {
 
     return (
         <Container maxWidth="lg">
-            <Typography align="center" variant="h5" color="textPrimary" gutterBottom={true}>Last Week Trending Films</Typography>
+            <Typography align="center" variant="h5" style={{color: 'white'}} gutterBottom={true}>Last Week Trending Films</Typography>
             <GridList cols={3} className={classes.gridList}>
                 {movies.map(movie => (
                     <GridListTile key={movie.id} component={RouterLink} to={`/movies/${movie.id}`} style={{height: '100%'}}>

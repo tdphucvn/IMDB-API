@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import SearchBar from '../utils/SearchBar';
 import Movies from '../utils/Movies';
 import TrendingMovies from '../utils/TrendingMovies';
+import GeneralHeader from '../utils/GeneralHeader';
 
 
 const Search = () => {
@@ -67,10 +68,11 @@ const Search = () => {
     }, [query]);
     
     return (
-        <>
+        <div style={{paddingBottom: '30px', minHeight: '100vh'}}>
+            <GeneralHeader />
             <SearchBar state={[query, setQuery]}/>
             {movies.length > 0 ? <Movies movies={movies}/> : <TrendingMovies movies={trendingMovies}/>}
-        </>
+        </div>
     )
 }
 

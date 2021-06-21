@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1
     },
     linksContainer: {
-        width: '10%',
+        width: '20%',
         display: 'flex',
         justifyContent: 'space-between'
     }
@@ -36,11 +36,12 @@ const GeneralHeader = () => {
         <>
             <AppBar position="static" color="transparent" style={{borderBottom: '1px solid #292f48'}}>
                 <Toolbar className={classes.navBar}>
-                        <Link href="#" underline="none"><Typography variant="h4" style={{color: 'white'}}>AMDT</Typography></Link>
+                        <Link href="/" underline="none"><Typography variant="h4" style={{color: 'white'}}>AMDT</Typography></Link>
                     <div className={classes.flexGrow}></div>
                     <div className={classes.linksContainer}>
-                        <Link href="#discover-container" underline="none" style={{color: 'white'}}><Typography>Discover</Typography></Link>
                         <Link component={RouterLink} to="/search" underline="none" style={{color: 'white'}}><Typography>Search</Typography></Link>
+                        <Link href="#discover-container" underline="none" style={{color: 'white'}}><Typography>Discover</Typography></Link>
+                        <Link href="#latest-news" underline="none" style={{color: 'white'}}><Typography>News</Typography></Link>
                     </div>
                 </Toolbar>
             </AppBar>

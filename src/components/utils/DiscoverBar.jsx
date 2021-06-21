@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     },
     select: {
         minWidth: 150,
+        '& .MuiInput-underline::before': {
+            borderBottom: '1px solid white'
+        }
     },
 }));
 const getYearsArray = (ar) => {
