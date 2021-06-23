@@ -41,7 +41,7 @@ const GeneralHeader = () => {
                     <div className={classes.linksContainer}>
                         <Link component={RouterLink} to="/search" underline="none" style={{color: 'white'}}><Typography>Search</Typography></Link>
                         <Link href="#discover-container" underline="none" style={{color: 'white'}}><Typography>Discover</Typography></Link>
-                        <Link href="#latest-news" underline="none" style={{color: 'white'}}><Typography>News</Typography></Link>
+                        <Link href="#actors" underline="none" style={{color: 'white'}}><Typography>Actors</Typography></Link>
                     </div>
                 </Toolbar>
             </AppBar>

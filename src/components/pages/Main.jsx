@@ -2,6 +2,7 @@ import {React} from 'react';
 import Landing from '../utils/Landing';
 import GeneralHeader from '../utils/GeneralHeader';
 import Discover from './Discover';
+import Actors from './Actors';
 
 const Main = () => {
 
@@ -10,6 +11,7 @@ const Main = () => {
           <GeneralHeader />
           <Landing />
           <Discover />
+          <Actors />
         </>
     )
 };

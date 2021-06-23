@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     moreButton: {
-        margin: 'auto'
+        margin: 'auto',
+        marginTop: theme.spacing(3)
     }
 }));
 
