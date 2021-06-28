@@ -1,8 +1,7 @@
-import {React, useState} from 'react'
+import {React} from 'react'
 import { Typography, AppBar, Toolbar,  makeStyles } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link  from '@material-ui/core/Link';
-import Navigation from './Navigation';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -28,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GeneralHeader = () => {
-    const [menu, setMenu] = useState(false);
-
     const classes = useStyles();
 
     return (
@@ -46,7 +43,6 @@ const GeneralHeader = () => {
                 </Toolbar>
             </AppBar>
             <div id="back-to-top-anchor" className={classes.bottomGutter}></div>
-            {menu === true ? <Navigation menu={[menu, setMenu]}/> : ''}
         </>
     )
 }

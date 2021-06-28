@@ -5,6 +5,7 @@ import PopularFamousPeople from '../utils/PopularFamousPeople';
 const Actors = () => {
     const [actors, setActors] = useState([]);
     const [actorsDetails, setActorsDetails] = useState([]);
+    const [searchActor, setSearchActor] = useState('');
 
     const fetchActors = async () => {
         const URL = 'https://api.themoviedb.org/3/person/popular?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US&page=1';
@@ -63,10 +64,37 @@ const Actors = () => {
         };
     }, [actors]);
 
+    useEffect(() => {
+        if(searchActor === '') return;
+        const searchActorFetch = async () => {
+            const URL = `https://api.themoviedb.org/3/search/person?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US&query=${searchActor}&page=1&include_adult=false`;
+            const method = { method: 'GET', contentType: 'application/json' };
+            return await fetch(URL, method)
+                .then((res) => {
+                    if(res.ok) return res.json();
+                    return res.text().then((err) => {
+                        return Promise.reject({
+                            status: res.status,
+                            statusText: res.statusText,
+                            errorMessage: err,
+                        });
+                    });
+                })
+                .then(data => {
+                    setActorsDetails([]);
+                    console.log(data.results)
+                    setActors(data.results);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        };
+        searchActorFetch();
+    }, [searchActor])
+
     return (
         <div>
-            <SearchPeople />
-            <PopularFamousPeople actors={actorsDetails} /> 
+            <PopularFamousPeople actors={actorsDetails} searchActor={[searchActor, setSearchActor]} /> 
         </div>
     )
 }
