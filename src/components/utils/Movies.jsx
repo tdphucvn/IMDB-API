@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardContent: {
         '& *': {
-            color: 'white'
+            // color: 'white'
         }
     },
     ratingBadge: {

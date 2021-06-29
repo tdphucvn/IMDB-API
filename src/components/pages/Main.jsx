@@ -1,6 +1,6 @@
 import {React} from 'react';
-import Landing from '../utils/Landing';
-import GeneralHeader from '../utils/GeneralHeader';
+import Landing from '../utils/land/Landing';
+import GeneralHeader from '../utils/header/GeneralHeader';
 import Discover from './Discover';
 import Actors from './Actors';
 

@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react';
-import SearchBar from '../utils/SearchBar';
+import SearchBar from '../utils/search/SearchBar';
 import Movies from '../utils/Movies';
-import TrendingMovies from '../utils/TrendingMovies';
-import GeneralHeader from '../utils/GeneralHeader';
+import TrendingMovies from '../utils/search/TrendingMovies';
+import GeneralHeader from '../utils/header/GeneralHeader';
 
 
 const Search = () => {

@@ -10,32 +10,32 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        '& .MuiFormLabel-root':{
-            color: 'white'
-        },
+        // '& .MuiFormLabel-root':{
+        //     color: 'white'
+        // },
     },
     titleInput: {
         flex: '1',
         marginRight: theme.spacing(2),
         minWidth: 100,
-        '& ::before': {
-            borderBottom: '1px solid white'
-        },
-        color: 'white',
-        '& .MuiInputBase-root':{
-            color: 'white',
-        }
+        // '& ::before': {
+        //     borderBottom: '1px solid white'
+        // },
+        // color: 'white',
+        // '& .MuiInputBase-root':{
+        //     color: 'white',
+        // }
     },
     yearInput: {
         marginRight: theme.spacing(2),
         minWidth: 40,
-        '& ::before': {
-            borderBottom: '1px solid white'
-        },
-        color: 'white',
-        '& .MuiInputBase-root':{
-            color: 'white',
-        }
+        // '& ::before': {
+        //     borderBottom: '1px solid white'
+        // },
+        // color: 'white',
+        // '& .MuiInputBase-root':{
+        //     color: 'white',
+        // }
     },
     container: {
         marginTop: theme.spacing(4),

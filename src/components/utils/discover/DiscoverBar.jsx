@@ -68,8 +68,8 @@ const DiscoverBar = ({state, genresProps, accordion}) => {
         <React.Fragment>
             <FormGroup row>
                     <FormControl component="form" className={classes.formControl}>
-                        <InputLabel style={{color: 'white'}}>Sorted By:</InputLabel>
-                        <Select name="sort" value={sort} onChange={handleSortChange} className={classes.select} style={{color: 'white'}}>
+                        <InputLabel>Sorted By:</InputLabel>
+                        <Select name="sort" value={sort} onChange={handleSortChange} className={classes.select}>
                             <MenuItem value={"sort_by=populatiry.desc"}>Popularity</MenuItem>
                             <MenuItem value={"sort_by=revenue.desc"}>Revenue</MenuItem>
                             <MenuItem value={"sort_by=vote_average.desc"}>Vote Average</MenuItem>
@@ -77,8 +77,8 @@ const DiscoverBar = ({state, genresProps, accordion}) => {
                         </Select>
                     </FormControl>
                     <FormControl component="form" className={classes.formControl}>
-                        <InputLabel style={{color: 'white'}}>Released Year</InputLabel>
-                        <Select name="release-year" value={year} onChange={handleYearChange} className={classes.select}  style={{color: 'white', borderColor: 'white'}}>
+                        <InputLabel>Released Year</InputLabel>
+                        <Select name="release-year" value={year} onChange={handleYearChange} className={classes.select}>
                             {yearsArray.map((year) => (
                                 <MenuItem key={year} value={year}>{year}</MenuItem>
                             ))}
@@ -88,7 +88,7 @@ const DiscoverBar = ({state, genresProps, accordion}) => {
                 <FormGroup row>
                     {genres.map((genre) => (
                         <FormControl key={genre.id}>
-                            <FormControlLabel control={<Checkbox checked={genre.state} value={genre.id} onChange={handleGenreChange} style={{color: 'white'}}/>} label={genre.name}/>
+                            <FormControlLabel control={<Checkbox checked={genre.state} value={genre.id} onChange={handleGenreChange}/>} label={genre.name}/>
                         </FormControl>
                     ))}
                 </FormGroup>

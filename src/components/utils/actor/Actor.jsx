@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import GeneralHeader from './GeneralHeader';
+import GeneralHeader from '../header/GeneralHeader';
 import ActorDetails from './ActorDetails';
 
 

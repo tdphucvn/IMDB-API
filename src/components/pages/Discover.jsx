@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
-import DiscoverHeader from '../utils/DiscoverHeader';
-import DiscoverMovies from '../utils/DiscoverMovies';
+import DiscoverHeader from '../utils/discover/DiscoverHeader';
+import DiscoverMovies from '../utils/discover/DiscoverMovies';
 
 const Discover = () => {
 
@@ -8,7 +8,7 @@ const Discover = () => {
     const [component, setComponent] = useState(0);
     
     return (
-        <div style={{paddingBottom: '30px'}}>
+        <div style={{padding: '30px 0'}}>
             <DiscoverHeader state={[query, setQuery]} moviesComponent={[component, setComponent]}/>
             <DiscoverMovies state={component} searchQuery={query}/>
         </div>

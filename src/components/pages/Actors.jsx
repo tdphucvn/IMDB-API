@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SearchPeople from '../utils/SearchPeople';
-import PopularFamousPeople from '../utils/PopularFamousPeople';
+import PopularFamousPeople from '../utils/actor/PopularFamousPeople';
 
 const Actors = () => {
     const [actors, setActors] = useState([]);
@@ -93,7 +92,7 @@ const Actors = () => {
     }, [searchActor])
 
     return (
-        <div>
+        <div style={{backgroundColor: '#F9F9F9', padding: '20px 0'}}>
             <PopularFamousPeople actors={actorsDetails} searchActor={[searchActor, setSearchActor]} /> 
         </div>
     )

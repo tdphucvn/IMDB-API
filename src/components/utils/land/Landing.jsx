@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     outerContainer: {
         display: 'flex',
         alignItems: 'center',
-        background: '#000021',
+        background: '#F9F9F9',
         position: 'relative',
     },
     innerContainer: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: '15vw',
         height: '40vh',
         minWidth: 100,
-        background: 'black'
+        // background: 'black'
     },
     filmContainerTransparent: {
         width: '15vw',
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         border: '1px solid white',
         zIndex: '999',
-        background: 'rgba(255, 255, 255, 0.300)',
+        background: 'rgba(203, 203, 203, 0.500)',
     },
     backButton: {
         top: 'calc(50%)',
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 3,
-        background: '#000021',
+        // background: '#000021',
         opacity: 0.5,
     }
 }));
@@ -197,7 +197,7 @@ const Landing = () => {
     return (
         <div className={classes.outerContainer}>
             <div className={classes.slider}></div>
-            <Typography align="center" variant="h5" style={{color: 'white', position: 'absolute', top: '6vh', width: '100%'}}>Our weekly film suggestion exclusively for you!</Typography>
+            <Typography align="center" variant="h5" style={{ position: 'absolute', top: '6vh', width: '100%'}}>Our weekly film suggestion exclusively for you!</Typography>
             <Container style={{maxWidth: '100%'}} className={classes.innerContainer}>
             <Button onClick={handleBack} disabled={backDisabled} className={`${classes.backButton} ${classes.button}`} variant="outlined"><ArrowBackIcon /></Button>
 
@@ -263,8 +263,9 @@ const Landing = () => {
                     if (activeCard.overview !== '')
                     return(<Paper className={classes.filmContainer} key={activeCard.id} elevation={10}>
                         <GridList style={{height: '100%'}}>
-                            <GridListTile style={{width: '100%', height: '100%'}}>
-                                <img src={IMG_API + activeCard.poster_path} alt="" />
+                            <GridListTile style={{width: '100%', height: '100%', position: 'relative', padding: 0, overflow: 'hidden', borderRadius: 7}}>
+                                <div style={{width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, background: 'black', zIndex: 3, opacity: 0.5}}></div>
+                                <img src={IMG_API + activeCard.poster_path} alt=""/>
                             </GridListTile>
                         </GridList>
                     </Paper>);

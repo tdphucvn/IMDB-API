@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Movies from './Movies';
+import Movies from '../Movies';
 
 const TRENDING = 0;
 const REVENUE = 1;
 const LATEST = 2;
-const SEARCH = 3;
 
 const setSearchOption = (state) => {
     let searchOption;

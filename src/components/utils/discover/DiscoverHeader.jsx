@@ -5,9 +5,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        marginBottom: theme.spacing(2),
-        color: 'white',
-        
+        marginBottom: theme.spacing(2),        
     },
     discoverTabs: {
         width: '50%',
@@ -79,15 +77,15 @@ const DiscoverHeader = ({state, moviesComponent}) => {
         <>
             <Container maxWidth="lg" className={classes.container} id="discover-container">
                 <div className={classes.discoverNavigation}>
-                    <Typography variant="h4" style={{color: 'white'}} gutterBottom={false}>Discover latest movies</Typography>
+                    <Typography variant="h4" gutterBottom={false}>Discover latest movies</Typography>
                     <Tabs value={innerValue} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
-                        <Tab label="Trending" style={{color: 'white'}} disabled={accordionExpanded}/>
-                        <Tab label="Revenue" style={{color: 'white'}} disabled={accordionExpanded}/>
-                        <Tab label="Latest" style={{color: 'white'}} disabled={accordionExpanded}/>
+                        <Tab label="Trending" disabled={accordionExpanded}/>
+                        <Tab label="Revenue" disabled={accordionExpanded}/>
+                        <Tab label="Latest" disabled={accordionExpanded}/>
                     </Tabs>
                 </div>
-                <Accordion onChange={() => handleCutomDiscover()} style={{color: 'white', background: 'transparent', borderBottom: '1px solid white', marginBottom: '30px'}} >
-                    <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
+                <Accordion onChange={() => handleCutomDiscover()}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography variant="h6">Custom Search Options</Typography>
                     </AccordionSummary>
                     <AccordionDetails style={{display: 'block'}}>

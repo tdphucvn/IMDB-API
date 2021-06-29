@@ -31,14 +31,14 @@ const GeneralHeader = () => {
 
     return (
         <>
-            <AppBar position="static" color="transparent" style={{borderBottom: '1px solid #292f48'}}>
+            <AppBar position="static" style={{backgroundColor: '#F9F9F9'}}>
                 <Toolbar className={classes.navBar}>
-                        <Link href="/" underline="none"><Typography variant="h4" style={{color: 'white'}}>AMDT</Typography></Link>
+                        <Link href="/" underline="none"><Typography variant="h4">AMDT</Typography></Link>
                     <div className={classes.flexGrow}></div>
                     <div className={classes.linksContainer}>
-                        <Link component={RouterLink} to="/search" underline="none" style={{color: 'white'}}><Typography>Search</Typography></Link>
-                        <Link href="#discover-container" underline="none" style={{color: 'white'}}><Typography>Discover</Typography></Link>
-                        <Link href="#actors" underline="none" style={{color: 'white'}}><Typography>Actors</Typography></Link>
+                        <Link component={RouterLink} to="/search" underline="none"><Typography>Search</Typography></Link>
+                        <Link href="#discover-container" underline="none"><Typography>Discover</Typography></Link>
+                        <Link href="#actors" underline="none"><Typography>Actors</Typography></Link>
                     </div>
                 </Toolbar>
             </AppBar>
