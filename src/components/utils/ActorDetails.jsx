@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ActorDetails = ({data}) => {
-    const [actorInfo, setActorInfo] = useState([]);
+    const [knownForMovies, setKnownForMovies] = useState([]);
 
     const {biography, birthday, known_for_department: department, name, place_of_birth: place, profile_path} = data;
 
@@ -36,7 +36,10 @@ const ActorDetails = ({data}) => {
 
                 })
                 .then((data) => {
-                    console.log(data);
+                    if(data === undefined) return;
+                    const { results } = data;
+                    const { known_for: knownFor } = results[0];
+                    setKnownForMovies(knownFor);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -72,7 +75,11 @@ const ActorDetails = ({data}) => {
                             </Typography>
                         </div>
                         <div className={classes.knownFor}>
-
+                            { knownForMovies && knownForMovies.map((movie) => (
+                               <div className={classes.profileImage} key={movie.id}>
+                                   <img src={IMG_API + movie.poster_path} alt="" />
+                               </div> 
+                            )) }
                         </div>
                     </div>
             </Container>
