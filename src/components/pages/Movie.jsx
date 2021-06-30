@@ -2,6 +2,7 @@ import { DialogTitle } from '@material-ui/core';
 import {React, useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import SingleHeader from '../utils/header/SingleHeader';
+import MovieOverview from '../utils/movie/MovieOverview';
 
 const Movie = () => {
     const [movie, setMovie] = useState([]);
@@ -23,7 +24,7 @@ const Movie = () => {
                     });
                 })
                 .then((data) => {
-                    setTimeout(() => setMovie(JSON.parse(data)), 700);
+                    setMovie(JSON.parse(data));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -32,29 +33,10 @@ const Movie = () => {
         fetchMovie();
     }, [URL]);
 
-    console.log(movie)
-
-    const {backdrop_path: backdrop, poster_path: poster, budget, genres, homepage, id: movieID, overview, vote_average: vote, release_date: release, title } = movie;
-    const IMG_API_BACKDROP = 'https://image.tmdb.org/t/p/original/';
-    const IMG_API_POSTER = 'https://image.tmdb.org/t/p/w500/';
-
     return (
         <>
             <SingleHeader />
-            {movie === undefined ? '' :
-                <>
-                    <h3>{title}</h3>
-                    <img src={IMG_API_BACKDROP + backdrop} alt="poster" />
-                    <img src={IMG_API_POSTER + poster} alt="" />
-                    <img src="" alt="" />
-                    <div>Release Date: {release}</div>
-                    <div>Genre: {genres && genres.map((genre) => (<div key={genre.id}>{genre.name}</div>))}</div>
-                    <div>Budget: {budget}</div>
-                    <div>{overview}</div>
-                    <div>Actors: {homepage}</div>
-                    <div>Rating {vote}</div>
-                </>
-            }
+            <MovieOverview movieData={movie}/>
         </>
     )
 }
