@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Typography, Button, Card, Grid, Container,  CardMedia, CardContent, makeStyles, useScrollTrigger, Zoom, Fab, Badge } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         zIndex: 2,
+        margin: '50px auto'
     },
     cardContent: {
         '& *': {
@@ -43,7 +45,7 @@ function ScrollTop(props) {
     const trigger = useScrollTrigger({
       target: window ? window() : undefined,
       disableHysteresis: true,
-      threshold: 1000,
+      threshold: 800,
     });
   
     const handleClick = (event) => {
@@ -75,7 +77,9 @@ const Movies = ({movies, props}) => {
     const classes = useStyles();
     const { response } = useSelector((state) => state.genre);
 
-    const middleIndex = Math.floor(movies.length / 2);
+    const middleIndex = 8
+    
+    ;
     const secondPartArray = movies.slice(middleIndex, movies.length);
 
     const [moviesToDisplay, setMoviesToDisplay] = useState([]);
@@ -89,8 +93,8 @@ const Movies = ({movies, props}) => {
     };
 
     useEffect(() => {
-        if(secondPartDisplayed && moviesToDisplay.length > 0) { setMoviesToDisplay([...moviesToDisplay, ...secondPartArray]) };
-        
+        if(secondPartDisplayed && moviesToDisplay.length > 0) { setMoviesToDisplay([...moviesToDisplay, ...secondPartArray]); return };
+        setMoviesToDisplay((movies) => movies.slice(0, middleIndex));
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [secondPartDisplayed])
 
@@ -100,8 +104,6 @@ const Movies = ({movies, props}) => {
         setMoviesToDisplay([...ar]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movies]);
-
-    console.log(moviesToDisplay);
 
     return (
         <>
@@ -118,10 +120,11 @@ const Movies = ({movies, props}) => {
                         };
                         return(
                         <Grid item xs={12} sm={6} md={3} key={movie.id}>
+                            <RouterLink to={`/movie/${movie.id}`} style={{textDecoration: 'none'}}>
                             <Badge badgeContent={rating(movie)} className={classes.ratingBadge}>
                                 <Card style={{backgroundColor: 'transparent'}}>
                                     {/* <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/> */}
-                                    <CardMedia component="img" src={IMG_API + movie.poster_path} style={{height: '50vh', maxHeight: '600px'}}/>
+                                    <CardMedia component="img" src={IMG_API + movie.poster_path} style={{height: '50vh', maxHeight: '600px', width: '100%'}}/>
                                     <CardContent className={classes.cardContent}>
                                         <Typography varaint="body2" color="textSecondary">
                                             {release_date && release_date.substring(0,4)} / {activeCardGenres[0] && activeCardGenres[0].name}
@@ -132,12 +135,13 @@ const Movies = ({movies, props}) => {
                                     </CardContent>
                                 </Card>
                             </Badge>
+                            </RouterLink>
                         </Grid>
                         )
                     })}
                 </Grid>                
                 <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <Button color="secondary" onClick={handleShowMore} variant="outlined" size="large" className={classes.moreButton}>Show more</Button>
+                    <Button color="secondary" onClick={handleShowMore} variant="outlined" size="large" className={classes.moreButton}>{secondPartDisplayed ? 'Show less' :  'Show more'}</Button>
                 </div>
             </Container>
             <ScrollTop {...props}>

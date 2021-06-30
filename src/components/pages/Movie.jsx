@@ -1,13 +1,13 @@
+import { DialogTitle } from '@material-ui/core';
 import {React, useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
+import SingleHeader from '../utils/header/SingleHeader';
 
-const Movie = (movies) => {
-    const [movie, setMovie] = useState();
+const Movie = () => {
+    const [movie, setMovie] = useState([]);
     const {id} = useParams();
     
-    const URL = `http://www.omdbapi.com/?apikey=2b921791&i=${id}`;
-
-    const previousMovies = movies.location.state;
+    const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US`;
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -33,19 +33,26 @@ const Movie = (movies) => {
     }, [URL]);
 
     console.log(movie)
+
+    const {backdrop_path: backdrop, poster_path: poster, budget, genres, homepage, id: movieID, overview, vote_average: vote, release_date: release, title } = movie;
+    const IMG_API_BACKDROP = 'https://image.tmdb.org/t/p/original/';
+    const IMG_API_POSTER = 'https://image.tmdb.org/t/p/w500/';
+
     return (
         <>
+            <SingleHeader />
             {movie === undefined ? '' :
                 <>
-                    <h3>{movie.Title}</h3>
-                    <img src={movie.Poster} alt="poster" />
-                    <div>Release Date: {movie.Released}</div>
-                    <div>Genre: {movie.Genre}</div>
-                    <div>Type: {movie.Type}</div>
-                    <div>{movie.Plot}</div>
-                    <div>Actors: {movie.Actors}</div>
-                    <div>Rating {movie.imdbRating}</div>
-                    <Link to={{pathname: "/", state: {previousMovies}}}>Back</Link>
+                    <h3>{title}</h3>
+                    <img src={IMG_API_BACKDROP + backdrop} alt="poster" />
+                    <img src={IMG_API_POSTER + poster} alt="" />
+                    <img src="" alt="" />
+                    <div>Release Date: {release}</div>
+                    <div>Genre: {genres && genres.map((genre) => (<div key={genre.id}>{genre.name}</div>))}</div>
+                    <div>Budget: {budget}</div>
+                    <div>{overview}</div>
+                    <div>Actors: {homepage}</div>
+                    <div>Rating {vote}</div>
                 </>
             }
         </>

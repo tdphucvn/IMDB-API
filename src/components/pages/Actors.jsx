@@ -92,7 +92,7 @@ const Actors = () => {
     }, [searchActor])
 
     return (
-        <div style={{backgroundColor: '#F9F9F9', padding: '20px 0'}}>
+        <div style={{backgroundColor: '#F9F9F9', padding: '50px 0'}} id="actors">
             <PopularFamousPeople actors={actorsDetails} searchActor={[searchActor, setSearchActor]} /> 
         </div>
     )

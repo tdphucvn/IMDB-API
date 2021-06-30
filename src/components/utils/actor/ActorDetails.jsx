@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Typography, Container, makeStyles } from '@material-ui/core';
+import TrendingMovies from '../search/TrendingMovies';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        margin: '50px auto'
     },
     profileImage: {
         height: 500,
@@ -14,13 +16,18 @@ const useStyles = makeStyles((theme) => ({
             height: '100%'
         }
     },
-
+    biography: {
+        padding: '0 24px'
+    },
+    personalInfo: {
+        margin: '15px 0'
+    }
 }));
 
 const ActorDetails = ({data}) => {
     const [knownForMovies, setKnownForMovies] = useState([]);
 
-    const {biography, birthday, known_for_department: department, name, place_of_birth: place, profile_path} = data;
+    const {biography, birthday, known_for_department: department, name, place_of_birth: place, profile_path, gender} = data;
 
     const classes = useStyles();
 
@@ -55,31 +62,36 @@ const ActorDetails = ({data}) => {
                         <div className={classes.profileImage}>
                             <img src={IMG_API + profile_path} alt="" />
                         </div>
-                        <div className={classes.birthday}>
-                            <Typography variant="body2">Birthday: { birthday }</Typography>
+                        <div className={classes.personalInfo}>
+                            <Typography variant="h6">Birthday:</Typography>
+                            <Typography variant="body2">{birthday}</Typography>
                         </div>
-                        <div className={classes.place}>
-                            <Typography variant="body2">Birth place: { place }</Typography>
+                        <div className={classes.personalInfo}>
+                            <Typography variant="h6">Place of Birth:</Typography>
+                            <Typography variant="body2">{place}</Typography>
                         </div>
-                        <div className={classes.department}>
-                            <Typography variant="body2">Working in: { department }</Typography>
+                        <div className={classes.personalInfo}>
+                            <Typography variant="h6">Working in:</Typography>
+                            <Typography variant="body2">{department}</Typography>
+                        </div>
+                        <div className={classes.personalInfo}>
+                            <Typography variant="h6">Gender</Typography>
+                            <Typography variant="body2">{gender === 1 ? 'Female' : 'Male'}</Typography>
                         </div>
                     </div>
                     <div className={classes.secondColumn}>
                         <div className={classes.biography}>
-                            <Typography variant="h4">
+                            <Typography variant="h4" gutterBottom={true}>
                                 {name}
                             </Typography>
+                            <Typography variant="h6" gutterBottom={true}>Biography</Typography>
                             <Typography variant="body2" paragraph gutterBottom={true}>
                                 {biography}
                             </Typography>
                         </div>
                         <div className={classes.knownFor}>
-                            { knownForMovies && knownForMovies.map((movie) => (
-                               <div className={classes.profileImage} key={movie.id}>
-                                   <img src={IMG_API + movie.poster_path} alt="" />
-                               </div> 
-                            )) }
+                            <Typography variant="h5" style={{padding: '0 24px', marginTop: '50px'}}>Known For: </Typography>
+                            <TrendingMovies movies={knownForMovies} />
                         </div>
                     </div>
             </Container>

@@ -1,4 +1,4 @@
-import {React} from 'react'
+import React from 'react'
 import { Typography, AppBar, Toolbar,  makeStyles } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link  from '@material-ui/core/Link';
@@ -21,17 +21,19 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1
     },
     linksContainer: {
-        width: '25%',
+        width: '15%',
         display: 'flex',
         justifyContent: 'space-between'
     }
 }));
 
-const GeneralHeader = () => {
+
+const SingleHeader = () => {
+
     const classes = useStyles();
 
     return (
-        <>
+        <React.Fragment>
             <AppBar position="static" style={{backgroundColor: '#0d253f'}}>
                 <Toolbar className={classes.navBar}>
                     <RouterLink to="/">
@@ -39,15 +41,14 @@ const GeneralHeader = () => {
                     </RouterLink>
                     <div className={classes.flexGrow}></div>
                     <div className={classes.linksContainer}>
+                        <Link component={RouterLink} to="/" underline="none"><Typography style={{color: 'white'}} variant="h6">Home</Typography></Link>
                         <Link component={RouterLink} to="/search" underline="none"><Typography style={{color: 'white'}} variant="h6">Search</Typography></Link>
-                        <Link href="#discover-container" underline="none"><Typography style={{color: 'white'}} variant="h6">Discover</Typography></Link>
-                        <Link href="#actors" underline="none"><Typography style={{color: 'white'}} variant="h6">Actors</Typography></Link>
                     </div>
                 </Toolbar>
             </AppBar>
             <div id="back-to-top-anchor" className={classes.bottomGutter}></div>
-        </>
+        </React.Fragment>
     )
 }
 
-export default GeneralHeader
+export default SingleHeader

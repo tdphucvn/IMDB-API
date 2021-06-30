@@ -16,10 +16,10 @@ const TrendingMovies = ({movies}) => {
 
     return (
         <Container maxWidth="lg">
-            <Typography align="center" variant="h5" style={{color: 'white'}} gutterBottom={true}>Last Week Trending Films</Typography>
+            <Typography align="center" variant="h5"gutterBottom={true}>LAST WEEK TRENDING MOVIES</Typography>
             <GridList cols={3} className={classes.gridList}>
                 {movies.map(movie => (
-                    <GridListTile key={movie.id} component={RouterLink} to={`/movies/${movie.id}`} style={{height: '100%'}}>
+                    <GridListTile key={movie.id} component={RouterLink} to={`/movie/${movie.id}`} style={{height: '100%'}}>
                         <img src={IMG_API + movie.poster_path} alt={movie.title} />
                         <GridListTileBar title={movie.title}/>
                     </GridListTile>

@@ -7,7 +7,7 @@ import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     personLink: {
-        textDecoration: 'none', 
+        textDecoration: 'none',
     },
     search: {
         display: 'flex',
@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         marginBottom: theme.spacing(3),
+    },
+    personLinkContainer: {
+        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+        borderRadius: 7
     }
 }));
 
@@ -51,7 +55,7 @@ const PopularFamousPeople = ({actors, searchActor}) => {
             <Container>
                 <div className={classes.peopleHeader}>
                     <Typography variant="h4" gutterBottom={true}>
-                        Popular People
+                        POPULAR PEOPLE
                     </Typography>
                     <form id="searchFamousPeople" className={classes.search} onSubmit={handleSearchFamousPeople}>
                         <div className={classes.searchIcon}><SearchIcon /></div>
@@ -61,12 +65,14 @@ const PopularFamousPeople = ({actors, searchActor}) => {
                 <Grid container spacing={3} className={classes.famousPeopleContainer}>
                     {actors && actors.map(actor => (
                         <Grid item xs={12} sm={6} md={3} key={actor.id} >
-                            <Card component={RouterLink} to={`/person/${actor.id}`} className={classes.personLink}>
-                                <CardMedia component="img" src={actor.profile_path !== null ? IMG_API + actor.profile_path : ''}></CardMedia>
-                                <CardContent>
-                                    <Typography variant="h6">{actor.name}</Typography>
-                                </CardContent>
-                            </Card>
+                            <div className={classes.personLinkContainer}>
+                                <Card component={RouterLink} to={`/person/${actor.id}`} className={classes.personLink}>
+                                    <CardMedia component="img" src={actor.profile_path !== null ? IMG_API + actor.profile_path : ''}></CardMedia>
+                                    <CardContent>
+                                        <Typography variant="h6">{actor.name}</Typography>
+                                    </CardContent>
+                                </Card>
+                            </div>
                         </Grid>
                     ))}
                 </Grid>

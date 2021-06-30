@@ -8,7 +8,7 @@ const Discover = () => {
     const [component, setComponent] = useState(0);
     
     return (
-        <div style={{padding: '30px 0'}}>
+        <div style={{padding: '50px 0'}}>
             <DiscoverHeader state={[query, setQuery]} moviesComponent={[component, setComponent]}/>
             <DiscoverMovies state={component} searchQuery={query}/>
         </div>

@@ -77,7 +77,7 @@ const DiscoverHeader = ({state, moviesComponent}) => {
         <>
             <Container maxWidth="lg" className={classes.container} id="discover-container">
                 <div className={classes.discoverNavigation}>
-                    <Typography variant="h4" gutterBottom={false}>Discover latest movies</Typography>
+                    <Typography variant="h4" gutterBottom={false}>DISCOVER LATEST TRENDING MOVIES</Typography>
                     <Tabs value={innerValue} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
                         <Tab label="Trending" disabled={accordionExpanded}/>
                         <Tab label="Revenue" disabled={accordionExpanded}/>
