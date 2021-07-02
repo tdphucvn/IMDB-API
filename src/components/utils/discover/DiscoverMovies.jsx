@@ -41,7 +41,7 @@ const setSearchOption = (state) => {
 }
 
 
-const DiscoverMovies = ({state, searchQuery}) => {
+const DiscoverMovies = ({state, searchQuery, loading}) => {
     const [movies, setMovies] = useState([]);
 
     const fetchMovies = async (searchOptions) => {
@@ -64,6 +64,7 @@ const DiscoverMovies = ({state, searchQuery}) => {
                 })
                 .catch(err => {
                     console.log(err);
+                    
                 });
         };
         fetchMoviesData();

@@ -64,8 +64,6 @@ const MovieOverview = ({movieData, trailer, crewMembers}) => {
     const IMG_API_BACKDROP = 'https://image.tmdb.org/t/p/original/';
     const IMG_API_POSTER = 'https://image.tmdb.org/t/p/w500/';
 
-    console.log(crewMembers)
-
     return (
         <React.Fragment>
             {movieData && 

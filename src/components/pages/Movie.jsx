@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import SingleHeader from '../utils/header/SingleHeader';
 import MovieCast from '../utils/movie/MovieCast';
 import MovieOverview from '../utils/movie/MovieOverview';
@@ -61,7 +61,7 @@ const Movie = () => {
         fetchData(URL_DATA, setMovie);
         fetchData(URL_VIDEOS, setMovieTrailer);
         fetchData(URL_CREDIT, setMovieCredit);
-        fetchData(URL_RECOMMENTATION, setRecommendedMovies);        
+        fetchData(URL_RECOMMENTATION, setRecommendedMovies);    
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 

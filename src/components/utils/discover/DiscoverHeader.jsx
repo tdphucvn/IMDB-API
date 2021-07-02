@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const DiscoverHeader = ({state, moviesComponent}) => {
+const DiscoverHeader = ({state, moviesComponent, loading}) => {
     const classes = useStyles();
     const [searchQuery, setSearchQuery] = state;
     const [genres, setGenres] = useState([]);
@@ -29,6 +29,7 @@ const DiscoverHeader = ({state, moviesComponent}) => {
 
     const getGenre = () => {
         const fetchGenre = async () => {
+            
             const URL = "https://api.themoviedb.org/3/genre/movie/list?api_key=ef7ddaa9270377970a055a19e5bfc2e5&language=en-US";
             const defaultFetchGenre = async () => {
                 await fetch(URL, {method: 'GET', contentType: 'application/json'})
@@ -49,9 +50,11 @@ const DiscoverHeader = ({state, moviesComponent}) => {
                             return genre;
                         });
                         setGenres(dataEdit);
+                        
                     })
                     .catch((err) => {
-                    console.log(err);
+                        console.log(err);
+                        
                     });
             };
             defaultFetchGenre();

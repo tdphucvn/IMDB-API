@@ -205,7 +205,7 @@ const Landing = () => {
                                 <Paper className={classes.currentFilm} elevation={20}>
                                     <div className={classes.content}>
                                         <GridList cols={2} style={{width: '100%', margin: 0}}>
-                                            <GridListTile style={{height: '100%', paddingRight: '0px'}} className={classes.contentImage}>
+                                            <GridListTile style={{height: '100%', paddingRight: '0px', position:'relative'}} className={classes.contentImage}>
                                                 <img src={IMG_API + activeCard.poster_path} alt="" />
                                             </GridListTile>
                                             <GridListTile style={{height: '100%'}} className={classes.contentDescription}>
@@ -226,6 +226,12 @@ const Landing = () => {
                                                                 <TableRow>
                                                                     <TableCell style={{padding: '8px 16px', border: 'none'}}>Overview</TableCell>
                                                                     <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>{activeCard.overview.length > 100 ? activeCard.overview.substring(0, 97) + '...' : activeCard.overview}</TableCell>
+                                                                </TableRow>
+                                                                <TableRow>
+                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}></TableCell>
+                                                                    <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>
+                                                                        <Button variant="contained" color="secondary" component="a" href={`/movie/${activeCard.id}`}>Get More Info</Button>
+                                                                    </TableCell>
                                                                 </TableRow>
                                                             </TableBody>
                                                         </Table>

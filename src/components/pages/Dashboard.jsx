@@ -2,7 +2,6 @@ import {React} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Main from './Main';
 import Search from './Search';
-import Test from '../utils/Test';
 import Actor from '../utils/actor/Actor';
 import Movie from './Movie';
 
@@ -15,7 +14,6 @@ const Dashboard = () => {
                     <Route exact path="/search" component={Search}/>
                     <Route exact path="/person/:id" component={Actor}/>
                     <Route exact path="/movie/:id" component={Movie}/>
-                    <Route exact path="/test" component={Test} />
                 </Switch>
         </Router>
     )
