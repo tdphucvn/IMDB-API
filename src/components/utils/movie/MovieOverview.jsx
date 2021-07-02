@@ -1,6 +1,7 @@
 import React from 'react';
-import { Typography, makeStyles, Container, CircularProgress, Box, Button } from '@material-ui/core';
+import { Typography, makeStyles, Container, CircularProgress, Box, Button, Grid } from '@material-ui/core';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,17 +36,35 @@ const useStyles = makeStyles((theme) => ({
     },
     movieInfo: {
         flex: 2,
-        padding: 20,
+        padding: 30,
         color: 'white'
+    },
+    personLink: {
+        textDecoration: 'none',
+        color: 'white',
+        fontSize: '1.3rem', 
+        '&:hover': {
+            opacity: 0.7
+        }
+    },
+    marginVertical: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2), 
     }
 }));
 
-const MovieOverview = ({movieData, trailer}) => {
-    const {key} = trailer[0];
+const MovieOverview = ({movieData, trailer, crewMembers}) => {
     const classes = useStyles();
-    const {backdrop_path: backdrop, poster_path: poster, budget, genres, homepage, id: movieID, overview, vote_average: vote, release_date: release, title, production_countries: countries, runtime } = movieData;
+    const getKey = (arr) => {
+        if(arr === undefined || arr.length === 0) return [{key: 'none'}];
+        if(arr !== undefined) return arr[0];
+    };
+    const {key} = getKey(trailer);
+    const {backdrop_path: backdrop, poster_path: poster, genres, overview, vote_average: vote, release_date: release, title, production_countries: countries, runtime, tagline } = movieData;
     const IMG_API_BACKDROP = 'https://image.tmdb.org/t/p/original/';
     const IMG_API_POSTER = 'https://image.tmdb.org/t/p/w500/';
+
+    console.log(crewMembers)
 
     return (
         <React.Fragment>
@@ -57,9 +76,10 @@ const MovieOverview = ({movieData, trailer}) => {
                             <img src={IMG_API_POSTER + poster} alt="" />
                         </div>
                         <div className={classes.movieInfo}>
-                            <Typography variant="h4">{title} ({release && release.substring(0,4)})</Typography>
-                            <Typography variant="body1" gutterBottom={true}>{release} / <span>({countries && countries.map((country, countryIndex) => (<span key={countryIndex}>{country.name}</span>))})</span> / <span>{genres && genres.map((genre, index) => (<span>{genre.name}{genres.length-1 > index ? ', ' : ''}</span>))}</span> / <span>{runtime && runtime + 'min'}</span></Typography>
-                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                            <Typography variant="h4" className={classes.marginVertical}>{title} <span style={{opacity: 0.5}}>({release && release.substring(0,4)})</span></Typography>
+                            <Typography variant="body1"  className={classes.marginVertical}>{release} / <span>{countries && countries.map((country, countryIndex) => (<span key={countryIndex}>{country.name}</span>))}</span> / <span>{genres && genres.map((genre, genreIndex) => (<span key={genreIndex}>{genre.name}{genres.length-1 > genreIndex ? ', ' : ''}</span>))}</span> / <span>{runtime && runtime + ' min'}</span></Typography>
+                            <Typography variant="body2" style={{opacity: 0.5, fontSize: '1.4rem'}}  className={classes.marginVertical} component="i">{tagline}</Typography>
+                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}  className={classes.marginVertical}>
                                 <div style={{position: 'relative', display: 'inline-flex'}}>
                                     <CircularProgress variant="determinate" value={vote * 10} size="3.8rem" color="secondary" thickness={5}/>
                                     <Box
@@ -77,8 +97,16 @@ const MovieOverview = ({movieData, trailer}) => {
                                 </div>
                                 <Button color="secondary" startIcon={<PlayCircleFilledIcon />} variant="contained" component="a" href={`https://www.youtube.com/watch?v=${key}`} target="_blank" style={{padding: '9px 16px', marginLeft: 15}}>Play Trailer</Button>
                             </div>
-                            <Typography variant="h5">Overview</Typography>
-                            <Typography variant="body1">{overview && overview}</Typography>
+                            <Typography variant="h5" className={classes.marginVertical} style={{marginBottom: '0px'}}>Overview</Typography>
+                            <Typography variant="body1" className={classes.marginVertical}>{overview && overview}</Typography>
+                            <Grid container spacing={3} className={classes.marginVertical}>
+                                {crewMembers.map((member, memberIndex) => (
+                                    <Grid key={memberIndex} item md={4} xs={6}>
+                                        <Typography component={RouterLink} to={`/person/${member.id}`} className={classes.personLink}>{member.name}</Typography>
+                                        <Typography style={{opacity: 0.5}}>{member.job}</Typography>
+                                    </Grid>
+                                ))}
+                            </Grid>
                         </div>
                     </Container>
                 </div>

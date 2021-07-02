@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Button, Card, Grid, Container,  CardMedia, CardContent, makeStyles, useScrollTrigger, Zoom, Fab, Badge } from '@material-ui/core';
+import { Link , Typography, Button, Card, Grid, Container,  CardMedia, CardContent, makeStyles, useScrollTrigger, Zoom, Fab, Badge } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { Link as RouterLink } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
@@ -120,7 +119,7 @@ const Movies = ({movies, props}) => {
                         };
                         return(
                         <Grid item xs={12} sm={6} md={3} key={movie.id}>
-                            <RouterLink to={`/movie/${movie.id}`} style={{textDecoration: 'none'}}>
+                            <Link href={`/movie/${movie.id}`} style={{textDecoration: 'none'}}>
                             <Badge badgeContent={rating(movie)} className={classes.ratingBadge}>
                                 <Card style={{backgroundColor: 'transparent'}}>
                                     {/* <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/> */}
@@ -135,7 +134,7 @@ const Movies = ({movies, props}) => {
                                     </CardContent>
                                 </Card>
                             </Badge>
-                            </RouterLink>
+                            </Link>
                         </Grid>
                         )
                     })}
