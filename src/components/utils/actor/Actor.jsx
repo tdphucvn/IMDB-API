@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import GeneralHeader from '../header/GeneralHeader';
+import SingleHeader from '../header/SingleHeader';
 import ActorDetails from './ActorDetails';
 
 
@@ -59,7 +59,7 @@ const SearchPeople = () => {
 
     return (
         <div>
-            <GeneralHeader />
+            <SingleHeader />
             <ActorDetails data={actorDetails}/>
         </div>
     )

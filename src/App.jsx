@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getGenres } from './redux/GenresSlice';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Dashboard from './components/pages/Dashboard';
+import ScrollToTop from './ScrollToTop';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -13,11 +14,10 @@ const App = () => {
 
   return (
     <Router>
-      <div>
+        <ScrollToTop />
         <Switch>
           <Route path="/" component={Dashboard} />
         </Switch>
-      </div>
     </Router>
   ) 
 }

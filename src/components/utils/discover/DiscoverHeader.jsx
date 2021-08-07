@@ -12,10 +12,19 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         display: 'flex',
         justifyContent: 'center',
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(2),
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        }
     },
     discoverNavigation: {
         marginBottom: theme.spacing(3),
+    },
+    discoverTitle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+            fontSize: '1.875rem'
+        }
     }
 }));
 
@@ -80,7 +89,7 @@ const DiscoverHeader = ({state, moviesComponent, loading}) => {
         <>
             <Container maxWidth="lg" className={classes.container} id="discover-container">
                 <div className={classes.discoverNavigation}>
-                    <Typography variant="h4" gutterBottom={false}>DISCOVER LATEST TRENDING MOVIES</Typography>
+                    <Typography variant="h4" gutterBottom={false} className={classes.discoverTitle}>DISCOVER LATEST TRENDING MOVIES</Typography>
                     <Tabs value={innerValue} indicatorColor="secondary" onChange={handleTabChange} className={classes.discoverTabs} centered={true}>
                         <Tab label="Trending" disabled={accordionExpanded}/>
                         <Tab label="Revenue" disabled={accordionExpanded}/>

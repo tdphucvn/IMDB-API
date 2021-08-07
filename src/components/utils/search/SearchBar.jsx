@@ -10,32 +10,24 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        // '& .MuiFormLabel-root':{
-        //     color: 'white'
-        // },
+        [theme.breakpoints.down('sm')]: {
+            width: '80%'
+        }
     },
     titleInput: {
         flex: '1',
         marginRight: theme.spacing(2),
         minWidth: 100,
-        // '& ::before': {
-        //     borderBottom: '1px solid white'
-        // },
-        // color: 'white',
-        // '& .MuiInputBase-root':{
-        //     color: 'white',
-        // }
+        [theme.breakpoints.down('sm')]: {
+            width: '100%'
+        }
     },
     yearInput: {
         marginRight: theme.spacing(2),
         minWidth: 40,
-        // '& ::before': {
-        //     borderBottom: '1px solid white'
-        // },
-        // color: 'white',
-        // '& .MuiInputBase-root':{
-        //     color: 'white',
-        // }
+        [theme.breakpoints.down('sm')]: {
+            width: '100%'
+        }
     },
     container: {
         marginTop: theme.spacing(4),
@@ -61,8 +53,8 @@ const SearchBar = ({state}) => {
     return (  
         <>
             <Container maxWidth="lg" className={classes.container}>
-                <Typography variant="h4" align="center" style={{color: 'white'}}gutterBottom={true}>Search for your favourite films!</Typography>
-                <Typography variant="subtitle1" align="center" style={{color: 'white'}} gutterBottom={true}>All the films at one place</Typography>
+                <Typography variant="h4" align="center" style={{color: 'black'}}gutterBottom={true}>Search for your favourite films!</Typography>
+                <Typography variant="subtitle1" align="center" style={{color: 'black'}} gutterBottom={true}>All the films at one place</Typography>
                 <FormControl component="form" className={classes.formControl} variant="outlined" onSubmit={handleSearch}>
                     <TextField type="text" name="title" required label="Film Title" noValidate autoComplete="off" className={classes.titleInput}/>
                     <TextField type="number" name="year" label="Released Year" noValidate autoComplete="off" className={classes.yearInput} />

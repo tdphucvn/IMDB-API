@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, makeStyles, Container, GridList, GridListTile, GridListTileBar, IconButton } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     castGridList: {
@@ -8,7 +9,13 @@ const useStyles = makeStyles((theme) => ({
         height: 230,
         '& a': {
             textDecoration: 'none',
-            color: 'black'
+            color: 'black',
+            [theme.breakpoints.down('md')]: {
+                minWidth: 150,
+            }
+        },
+        [theme.breakpoints.down('md')]: {
+            width: 'calc(100vw - 40px)',
         }
     },
     movieGridList: {
@@ -16,13 +23,20 @@ const useStyles = makeStyles((theme) => ({
         height: 350,
         '& a': {
             textDecoration: 'none',
-            color: 'black'
+            color: 'black',
+            [theme.breakpoints.down('md')]: {
+                minWidth: 200,
+            }
+        },
+        [theme.breakpoints.down('md')]: {
+            width: 'calc(100vw - 40px)',
         }
     },
     container: {
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(5),
         display: 'flex',
+        flexWrap: 'wrap',
     },
     firstColumn: {
         flex: 5,
@@ -31,7 +45,10 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        paddingLeft: 30
+        paddingLeft: 30,
+        [theme.breakpoints.down('md')]: {
+            paddingLeft: 0,
+        }
     },
     factHeader: {
         fontSize: '1.2rem',
@@ -55,7 +72,7 @@ const MovieCast = ({cast, movieData, recommendation}) => {
                         <Typography variant="h5" gutterBottom={true}>Top Billed Cast</Typography>
                         <GridList cols={6.5} className={classes.castGridList}>
                             {cast.map(member => (
-                                <GridListTile key={member.id} component="a" href={`/person/${member.id}`} style={{height: '100%'}}>
+                                <GridListTile key={member.id} component={RouterLink} to={`/person/${member.id}`} style={{height: '100%'}}>
                                     <img src={IMG_API + member.profile_path} alt="profile_picture" />
                                     <GridListTileBar title={member.name} />
                                 </GridListTile>
@@ -67,7 +84,7 @@ const MovieCast = ({cast, movieData, recommendation}) => {
                             <Typography variant="h5" gutterBottom={true}>Recommended Movies You Should Watch</Typography>
                             <GridList cols={4.5} className={classes.movieGridList}>
                                 {movies && movies.map(movie => (
-                                    <GridListTile key={movie.id} component="a" href={`/movie/${movie.id}`} style={{height: '100%'}}>
+                                    <GridListTile key={movie.id} component={RouterLink} to={`/movie/${movie.id}`} style={{height: '100%'}}>
                                         <img src={IMG_API + movie.poster_path} alt="poster_image" />
                                         <GridListTileBar title={movie.title} />
                                     </GridListTile>

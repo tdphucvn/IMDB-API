@@ -6,7 +6,14 @@ const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         justifyContent: 'space-between',
-        margin: '50px auto'
+        margin: '50px auto',
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: 'flex-start',
+            flexWrap: 'wrap',
+        },
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center'
+        }
     },
     profileImage: {
         height: 500,
@@ -14,13 +21,24 @@ const useStyles = makeStyles((theme) => ({
         '& img': {
             borderRadius: 5,
             height: '100%'
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: 400
         }
     },
     biography: {
-        padding: '0 24px'
+        padding: '0 24px',
+        [theme.breakpoints.down('sm')]: {
+            padding: 0
+        }
     },
     personalInfo: {
         margin: '15px 0'
+    },
+    actorName: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.875rem',
+        }
     }
 }));
 
@@ -81,7 +99,7 @@ const ActorDetails = ({data}) => {
                     </div>
                     <div className={classes.secondColumn}>
                         <div className={classes.biography}>
-                            <Typography variant="h4" gutterBottom={true}>
+                            <Typography variant="h4" gutterBottom={true} className={classes.actorName}>
                                 {name}
                             </Typography>
                             <Typography variant="h6" gutterBottom={true}>Biography</Typography>

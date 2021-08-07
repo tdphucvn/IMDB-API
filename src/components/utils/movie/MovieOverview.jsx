@@ -5,6 +5,16 @@ import { Link as RouterLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
+    movieContainer: {
+        height: 'calc(100vh - 88px)',
+        backgroundSize: 'cover',
+        position: 'relative',
+        [theme.breakpoints.down('sm')]: {
+            minHeight: 'calc(100vh - 88px)',
+            height: 'auto',
+            backgroundPosition: 'center'
+        },
+    },
     slider: {
         position: 'absolute',
         top: 0,
@@ -23,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     moviePoster: {
+        position: 'relative',
         flex: 1,
         height: '100%',
         display: 'flex',
@@ -32,7 +43,10 @@ const useStyles = makeStyles((theme) => ({
         '& img': {
             height: '80%',
             borderRadius: 10
-        }, 
+        },
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
     },
     movieInfo: {
         flex: 2,
@@ -67,7 +81,7 @@ const MovieOverview = ({movieData, trailer, crewMembers}) => {
     return (
         <React.Fragment>
             {movieData && 
-                <div style={{backgroundImage: `url(${IMG_API_BACKDROP + backdrop})`, height: 'calc(100vh - 88px)', backgroundSize: 'cover', position: 'relative'}}>
+                <div style={{backgroundImage: `url(${IMG_API_BACKDROP + backdrop})`}} className={classes.movieContainer}>
                     <div className={classes.slider}></div>
                     <Container maxWidth="lg" className={classes.movieInfoContainer}>
                         <div className={classes.moviePoster}>

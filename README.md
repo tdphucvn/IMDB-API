@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# HDNet Movies - Movie Database using TMDB API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a movie database containing thousands of movies with all their information. Furthermore also actors and their personal information could be found there. User can also use various features such as search, filter, sort or discover. The application itself was then built using React.js as the frontend framework. All the data that is displayed is fetched from the TMDB API.
 
-## Available Scripts
+## Used Technologies
 
-In the project directory, you can run:
+- HTML (EJS view engine)
+- CSS / Material UI
+- JavaScript
+- React
 
-### `npm start`
+## Given Problem
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The task was to create a fully functional movie database with features such as search, sort or discover and to put an emphasis on the design.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Application Design
 
-### `npm test`
+For this particular application I have decided to use an external API, thus I don't have to have my own backend set up. I'm TMDB API and for the frontend I have chosen React.js framework and Material UI library for styling.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In order to be able to communicate with the API I am using Javascript built-in Fetch API.
 
-### `npm run build`
+## Design
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Landing Page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+On the first glance of the website you can spot a simple slideshow of trending movies. At first I am fetching last week trending movies. After that I make an array of the displayed movies, where the middle one is highlighted. In order to always keep the array to contain 5 elements I am adding empty elements to the array when we are approaching one of the ends.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Discover Feature
 
-### `npm run eject`
+The discover section has three options. The first one is to display top 20 movies depending on whether they were trending last week. The second option is to sort them in the descending order by the revenue they have made. And the last option is to sort them according to their date of release. Furthermore I have also added an option of a custom search, where the clients can discover movies however they want it to be.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Actors
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The user is given an opportunity to search for an actor, but not only them. Producers, directors and other crew members are also in the database. And when it comes to displaying data about a certain person I'm fetching their biography, all the general personal information and the movies their are best known for.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Movies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The user is given an opportunity to search for a movie, with its title or the release year. When it comes to displaying the data about the movie I am fetching all the general information such as title, descirption, release year, rating etc. What's more on the landing page I am showing the most important members of the crew like producer or director. In the section above it the user can find the whole cast of the movie and movies that are similar or are recommended to the original one.
 
-## Learn More
+## HDNet Movies Demo Showcase
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Youtube Link](https://www.youtube.com/watch?v=BGZOmnE5RUI)

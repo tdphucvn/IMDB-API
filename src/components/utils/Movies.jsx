@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link , Typography, Button, Card, Grid, Container,  CardMedia, CardContent, makeStyles, useScrollTrigger, Zoom, Fab, Badge } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -107,7 +108,7 @@ const Movies = ({movies, props}) => {
     return (
         <>
             <Container maxWidth="lg" className={classes.container}>
-                <Grid container justify="flex-start" spacing={4}>
+                <Grid container spacing={3}>
                     {moviesToDisplay.map((movie) => {
                         const {title, release_date} = movie;
                         let activeCardGenres = [];
@@ -118,23 +119,21 @@ const Movies = ({movies, props}) => {
                             });
                         };
                         return(
-                        <Grid item xs={12} sm={6} md={3} key={movie.id}>
-                            <Link href={`/movie/${movie.id}`} style={{textDecoration: 'none'}}>
-                            <Badge badgeContent={rating(movie)} className={classes.ratingBadge}>
-                                <Card style={{backgroundColor: 'transparent'}}>
-                                    {/* <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/> */}
-                                    <CardMedia component="img" src={IMG_API + movie.poster_path} style={{height: '50vh', maxHeight: '600px', width: '100%'}}/>
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography varaint="body2" color="textSecondary">
-                                            {release_date && release_date.substring(0,4)} / {activeCardGenres[0] && activeCardGenres[0].name}
-                                        </Typography>
-                                        <Typography variant="body2" color="textPrimary" paragraph>
-                                            {title ? title : 'No title'}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Badge>
-                            </Link>
+                        <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id} component={RouterLink} to={`/movie/${movie.id}`} style={{textDecoration: 'none', display: 'flex', justifyContent: 'center'}}>
+                                <Badge badgeContent={rating(movie)} className={classes.ratingBadge}>
+                                    <Card style={{backgroundColor: 'transparent'}}>
+                                        {/* <CardHeader title={movie.title} subheader={rating(movie)} className={classes.header}/> */}
+                                        <CardMedia component="img" src={IMG_API + movie.poster_path} style={{height: '50vh', maxHeight: '400px', width: '100%'}}/>
+                                        <CardContent className={classes.cardContent}>
+                                            <Typography varaint="body2" color="textSecondary">
+                                                {release_date && release_date.substring(0,4)} / {activeCardGenres[0] && activeCardGenres[0].name}
+                                            </Typography>
+                                            <Typography variant="body2" color="textPrimary" paragraph>
+                                                {title ? title : 'No title'}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Badge>
                         </Grid>
                         )
                     })}

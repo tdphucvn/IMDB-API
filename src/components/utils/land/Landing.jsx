@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { Button, Container, Divider, Paper, makeStyles, Typography, GridList, GridListTile, TableContainer, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
+import { Link as RouterLink } from 'react-router-dom';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -25,14 +26,20 @@ const useStyles = makeStyles((theme) => ({
         width: '15vw',
         height: '40vh',
         minWidth: 100,
-        borderRadius: 7
+        borderRadius: 7,
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
         // background: 'black'
     },
     filmContainerTransparent: {
         width: '15vw',
         height: '40vh',
         minWidth: 100,
-        background: 'transparent'
+        background: 'transparent',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
     },
     currentFilm: {
         width: '41vw',
@@ -42,6 +49,14 @@ const useStyles = makeStyles((theme) => ({
         top: 'calc(50%)',
         left: '50%',
         transform: 'translate(-50%, -50%)',
+        [theme.breakpoints.down('sm')]: {
+            height: '80%',
+            width: '50%'
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '80%',
+            height: '80%',
+        },
     },
     listTile: {
         // transform: 'scale(calc(1/1.8))',
@@ -56,11 +71,17 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
         borderRadius: '5px 0 0 5px',
         overflow: 'hidden',
+        [theme.breakpoints.down('md')]: {
+            borderRadius: 5,
+            padding: 0
+        },
     },
     contentDescription: {
         flex: 1.5,
         borderRadius: '0 5px 5px 0',
-
+        [theme.breakpoints.down('md')]: {
+            display: 'none'
+        },
     },
     button: {
         height: 64,
@@ -85,6 +106,23 @@ const useStyles = makeStyles((theme) => ({
     actionButtons: {
         display: 'flex',
     },
+    landingTitle: {
+        [theme.breakpoints.down('md')]: {
+            display: 'none',
+        }
+    },
+    view: {
+        display: 'none',
+        opacity: 0.7,
+        [theme.breakpoints.down('md')]: {
+            display: 'block',
+            zIndex: 999,
+            position: 'absolute',
+            top: '50%',
+            left: '50%', 
+            transform: 'translate(-50%, -50%)'
+        },
+    }
 }));
 
 const Landing = () => {
@@ -186,7 +224,7 @@ const Landing = () => {
 
     return (
         <div className={classes.outerContainer}>
-            <Typography align="center" variant="h5" style={{ position: 'absolute', top: '6vh', width: '100%'}}>OUR WEEKLY FILM SUGGESTION EXCLUSIVELY FOR YOU!</Typography>
+            <Typography align="center" variant="h5" style={{ position: 'absolute', top: '6vh', width: '100%'}} className={classes.landingTitle}>OUR WEEKLY FILM SUGGESTION EXCLUSIVELY FOR YOU!</Typography>
             <Container style={{maxWidth: '100%'}} className={classes.innerContainer}>
             <Button onClick={handleBack} disabled={backDisabled} className={`${classes.backButton} ${classes.button}`} variant="outlined"><ArrowBackIcon /></Button>
 
@@ -205,12 +243,13 @@ const Landing = () => {
                                 <Paper className={classes.currentFilm} elevation={20}>
                                     <div className={classes.content}>
                                         <GridList cols={2} style={{width: '100%', margin: 0}}>
-                                            <GridListTile style={{height: '100%', paddingRight: '0px', position:'relative'}} className={classes.contentImage}>
+                                            <GridListTile style={{height: '100%', paddingRight: '0px', position:'relative', padding: 0}} className={classes.contentImage}>
                                                 <img src={IMG_API + activeCard.poster_path} alt="" />
+                                                <Button variant="contained" color="secondary" component={RouterLink} to={`/movie/${activeCard.id}`} className={classes.view}>View</Button>
                                             </GridListTile>
                                             <GridListTile style={{height: '100%'}} className={classes.contentDescription}>
                                                 <div style={{maxWidth: '90%', margin: 'auto', position: 'relative', height: '100%'}}>
-                                                    <Typography color="textPrimary" variant="h4" style={{margin: '15px 0'}}>{activeCard.title}</Typography>
+                                                    <Typography color="textPrimary" variant="h6" component="h4" style={{margin: '15px 0'}}>{activeCard.title}</Typography>
                                                     <Divider></Divider>
                                                     <TableContainer>
                                                         <Table aria-label="simple table">
@@ -224,13 +263,9 @@ const Landing = () => {
                                                                     <TableCell style={{padding: '8px 16px', border: 'none'}}>{activeCard.release_date}</TableCell>
                                                                 </TableRow>
                                                                 <TableRow>
-                                                                    <TableCell style={{padding: '8px 16px', border: 'none'}}>Overview</TableCell>
-                                                                    <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>{activeCard.overview.length > 100 ? activeCard.overview.substring(0, 97) + '...' : activeCard.overview}</TableCell>
-                                                                </TableRow>
-                                                                <TableRow>
                                                                     <TableCell style={{padding: '8px 16px', border: 'none'}}></TableCell>
                                                                     <TableCell align="left" style={{padding: '8px 16px', border: 'none'}}>
-                                                                        <Button variant="contained" color="secondary" component="a" href={`/movie/${activeCard.id}`}>Get More Info</Button>
+                                                                        <Button variant="contained" color="secondary" component={RouterLink} to={`/movie/${activeCard.id}`}>Details</Button>
                                                                     </TableCell>
                                                                 </TableRow>
                                                             </TableBody>
